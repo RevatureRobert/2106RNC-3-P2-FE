@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Reggae+One&family=Roboto+Slab&display=swap");
+
+* {
+    font-family: "Reggae One", cursive;
+}
+
+.nav-link,
+.btn {
+    font-family: "Roboto Slab", serif;
+}
