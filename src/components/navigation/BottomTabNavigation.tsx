@@ -3,15 +3,16 @@
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
 
-import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from "../hooks/useColorScheme";
 import LoginScreen from "../../screens/Login";
-import { BottomTabParamList, LoginParamList, PostFeedParamList } from '../types';
+import { BottomTabParamList, LoginParamList, PostFeedParamList, AddPostParamList } from '../types';
 import PostFeedScreen from "../../screens/PostFeed";
+import AddPost from '../../screens/AddPost';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -36,6 +37,13 @@ export default function BottomTabNavigator () {
                 tabBarIcon: ({ color }) => <PostFeedIcon name="home" color={color} />,
               }}
           />
+            <BottomTab.Screen
+              name="AddPost"
+              component={AddPostNavigator}
+              options={{
+                tabBarIcon: ({ color }) => <AddPostIcon name="pluscircleo" color={color} />,
+              }}
+          />
         </BottomTab.Navigator>
     )
 }
@@ -48,6 +56,10 @@ function PostFeedIcon(props: { name: React.ComponentProps<typeof AntDesign>['nam
 }
 
 function LoginIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
+  return <AntDesign size={30} style={{marginBottom: -3}} {...props} />;
+}
+
+function AddPostIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
   return <AntDesign size={30} style={{marginBottom: -3}} {...props} />;
 }
 
@@ -83,5 +95,22 @@ function PostFeedNavigator() {
         }}
       />
     </PostFeedStack.Navigator>
+  );
+}
+
+const AddPostStack = createStackNavigator<AddPostParamList>();
+
+function AddPostNavigator() {
+  return (
+    <AddPostStack.Navigator>
+      <AddPostStack.Screen
+        name="AddPost"
+        component={AddPost}
+        options={{ 
+          headerTitle: 'Social Justice Warriors'
+          
+        }}
+      />
+    </AddPostStack.Navigator>
   );
 }

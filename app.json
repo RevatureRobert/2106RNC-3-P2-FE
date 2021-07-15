@@ -4,6 +4,7 @@
     "slug": "newProject",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "sjw",
     "icon": "./src/assets/images/icon.png",
     "splash": {
       "image": "./src/assets/images/splash.png",

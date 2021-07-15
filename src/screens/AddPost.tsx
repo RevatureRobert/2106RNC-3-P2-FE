@@ -5,16 +5,7 @@ import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
 export default function LoginScreen() {
-    const [username, onChangeUsername] = useState('');
-    const [password, onChangePass] = useState('');
-
-    const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        e.preventDefault();
-        LoginCognito.login(username, password, false)
-            .then((signUpResult: CognitoUser) => {
-                //redirect to home
-            }).catch(console.error)
-    }
+    const [text, onChangeText] = useState('');
 
     return (
         <View style={styles.container}>
@@ -23,21 +14,14 @@ export default function LoginScreen() {
                 source={require("../assets/images/logo.png")}
             />
             <View style={styles.container2}>
-                <Text style={styles.title}>Username</Text>
+                <Text style={styles.title}>Write a Post</Text>
                 <TextInput
                 style={styles.input}
-                onChangeText={onChangeUsername}
-                value={username}
-                />
-                <Text style={styles.title}>Password</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={onChangePass}
-                value={password}
+                onChangeText={onChangeText}
+                value={text}
                 />
                 <Button
-                    onPress={onTouch}
-                    title="Login"
+                    title="POST"
                     color="#d64045"
                 />
             </View>
@@ -71,6 +55,6 @@ const styles = StyleSheet.create({
     container2: {
         flex: 1,
         alignContent: "center",
-        padding: 50,
+        padding: 50
     }
 })

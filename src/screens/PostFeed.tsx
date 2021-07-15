@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, FlatList,  } from 'react-native';
+import { StyleSheet, FlatList, Image } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
@@ -15,6 +15,10 @@ const data = [
   {
     id: 'test-id3',
     title: 'Post 3',
+  },
+  {
+    id: 'test-id4',
+    title: 'Post 4',
   }
 ];
 
@@ -31,6 +35,10 @@ export default function PostFeedScreen() {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={require("../assets/images/logo.png")}
+      />
       <Text style={styles.title}>What's new?</Text>
       <FlatList
       data={data}
@@ -51,7 +59,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    padding: 10
   },
   separator: {
     marginVertical: 30,
@@ -64,4 +73,10 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 10,
   },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+    alignSelf: 'flex-start',
+    padding: 20
+},
 });

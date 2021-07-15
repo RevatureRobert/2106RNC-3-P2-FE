@@ -11,6 +11,7 @@
   export type BottomTabParamList = {
     Login: undefined
     PostFeed: undefined;
+    AddPost: undefined;
   };
 
   export type LoginParamList = {
@@ -19,4 +20,8 @@
 
   export type PostFeedParamList = {
     PostFeed: undefined;
+  }
+
+  export type AddPostParamList = {
+    AddPost: undefined;
   }
