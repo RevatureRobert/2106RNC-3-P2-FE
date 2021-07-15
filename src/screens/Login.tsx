@@ -8,12 +8,16 @@ export default function LoginScreen() {
     const [username, onChangeUsername] = useState('');
     const [password, onChangePass] = useState('');
 
-    const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        e.preventDefault();
-        LoginCognito.login(username, password, false)
-            .then((signUpResult: CognitoUser) => {
-                //redirect to home
-            }).catch(console.error)
+    // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    //     e.preventDefault();
+    //     LoginCognito.login(username, password, false)
+    //         .then((signUpResult: CognitoUser) => {
+    //             //redirect to home
+    //         }).catch(console.error)
+    // }
+
+    const onTouch = () => {
+        alert("Clicked");
     }
 
     return (

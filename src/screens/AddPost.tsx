@@ -7,6 +7,10 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 export default function LoginScreen() {
     const [text, onChangeText] = useState('');
 
+    const buttonClickListener = () => {
+        alert("Clicked");
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -21,6 +25,7 @@ export default function LoginScreen() {
                 value={text}
                 />
                 <Button
+                    onPress={buttonClickListener}
                     title="POST"
                     color="#d64045"
                 />

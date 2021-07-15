@@ -12,6 +12,7 @@
     Login: undefined
     PostFeed: undefined;
     AddPost: undefined;
+    Profile: undefined;
   };
 
   export type LoginParamList = {
@@ -24,4 +25,8 @@
 
   export type AddPostParamList = {
     AddPost: undefined;
+  }
+
+  export type ProfileParamList = {
+    Profile: undefined;
   }

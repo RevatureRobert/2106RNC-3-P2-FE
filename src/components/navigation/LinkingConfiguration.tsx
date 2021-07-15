@@ -22,6 +22,16 @@
                PostFeed: 'post-feed',
              },
            },
+           AddPost: {
+            screens: {
+              PostFeed: 'post-feed',
+            },
+          },
+          Profile: {
+            screens: {
+              PostFeed: 'post-feed',
+            },
+          },
          },
        },
        NotFound: '*',

@@ -10,9 +10,10 @@ import React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from "../hooks/useColorScheme";
 import LoginScreen from "../../screens/Login";
-import { BottomTabParamList, LoginParamList, PostFeedParamList, AddPostParamList } from '../types';
+import { BottomTabParamList, LoginParamList, PostFeedParamList, AddPostParamList, ProfileParamList } from '../types';
 import PostFeedScreen from "../../screens/PostFeed";
 import AddPost from '../../screens/AddPost';
+import Profile from '../../screens/Profile';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -24,26 +25,33 @@ export default function BottomTabNavigator () {
             initialRouteName="Login"
             tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
             <BottomTab.Screen
-              name="Login"
-              component={LoginNavigator}
-              options={{
-                tabBarIcon: ({ color }) => <LoginIcon name="lock" color={color} />,
-            }}
-            />
-            <BottomTab.Screen
               name="PostFeed"
               component={PostFeedNavigator}
               options={{
                 tabBarIcon: ({ color }) => <PostFeedIcon name="home" color={color} />,
               }}
-          />
+            />
             <BottomTab.Screen
               name="AddPost"
               component={AddPostNavigator}
               options={{
                 tabBarIcon: ({ color }) => <AddPostIcon name="pluscircleo" color={color} />,
               }}
-          />
+            />
+            <BottomTab.Screen
+              name="Profile"
+              component={ProfileNavigator}
+              options={{
+                tabBarIcon: ({ color }) => <ProfileIcon name="user" color={color} />,
+            }}
+            />
+            <BottomTab.Screen
+              name="Login"
+              component={LoginNavigator}
+              options={{
+                tabBarIcon: ({ color }) => <LoginIcon name="lock" color={color} />,
+            }}
+            />
         </BottomTab.Navigator>
     )
 }
@@ -60,6 +68,10 @@ function LoginIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']
 }
 
 function AddPostIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
+  return <AntDesign size={30} style={{marginBottom: -3}} {...props} />;
+}
+
+function ProfileIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
   return <AntDesign size={30} style={{marginBottom: -3}} {...props} />;
 }
 
@@ -112,5 +124,18 @@ function AddPostNavigator() {
         }}
       />
     </AddPostStack.Navigator>
+  );
+}
+
+const ProfileStack = createStackNavigator<ProfileParamList>();
+
+function ProfileNavigator() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="Profile"
+        component={Profile}
+      />
+    </ProfileStack.Navigator>
   );
 }
