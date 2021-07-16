@@ -1,11 +1,11 @@
 import {describe} from "@jest/globals";
-import {IUser} from "../../models/userModel";
+import {User} from "../../redux/action-types/UserActionTypes";
 import {mount} from "enzyme";
 import UserDataForm from "./UserProfile";
 import {Button, Container, Row, Input} from "reactstrap";
 import {element} from "prop-types";
 
-const testUser: IUser = {
+const testUser: User = {
     userName: "Jimothy@nomod.net",
     password: "passward",
     firstName: "Jimmy",

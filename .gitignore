@@ -4,9 +4,22 @@
 /node_modules
 /.pnp
 .pnp.js
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.csv
 
 # testing
 /coverage
+
+# macOS
+.DS_Store
 
 # production
 /build
