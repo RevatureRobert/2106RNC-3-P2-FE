@@ -27,7 +27,7 @@ const PostList = (props: any) => {
         const tempData = [...data];
 
         // Herein is the data saved for a visible update
-        tempData.push({postId: 'NEW MESSAGE ID', user: 'This guy', body: newPost});
+        tempData.unshift({postId: 'NEW MESSAGE ID', user: 'This guy', body: newPost});
 
         // Save function here or below
         setData(tempData);
