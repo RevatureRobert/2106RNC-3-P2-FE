@@ -39,11 +39,14 @@ export default function LoginScreen() {
                 onChangeText={onChangePass}
                 value={password}
                 />
+            <View style={styles.container3}>
                 <Button
                     onPress={onTouch}
                     title="Login"
                     color="#d64045"
+                    
                 />
+            </View>
             </View>
         </View>
     )
@@ -53,7 +56,8 @@ const styles = StyleSheet.create({
     input: {
         paddingTop: 50,
         height: 50,
-        borderWidth:2
+        borderWidth:2,
+        backgroundColor:"#fff"
     },
     title: {
         alignSelf: "center",
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
     tinyLogo: {
         width: 50,
         height: 50,
-        alignSelf: 'center',
+        alignSelf: "center",
         padding: 50,
         margin: 20
     },
@@ -76,5 +80,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: "center",
         padding: 50,
+    },
+    container3: {
+        flexDirection:'row',
+        alignSelf: 'center',
+        padding: 20,
+        borderRadius:30
     }
 })
