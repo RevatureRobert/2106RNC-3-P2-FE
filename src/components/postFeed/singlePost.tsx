@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const OptionalBody = (props: any) => {
     let body = props.body;
     if (body) {
-        return (<Text style={props.style}>{body}</Text>);
+        return (<Text {...props}>{body}</Text>);
     } else {
         return null;
     }

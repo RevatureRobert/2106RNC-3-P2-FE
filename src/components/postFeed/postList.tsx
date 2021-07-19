@@ -25,6 +25,8 @@ const PostList = (props: any) => {
         // Use of the spread operator here is NECESSARY for live
         //  re-rendering of the flatlist component
         const tempData = [...data];
+
+        // Herein is the data saved for a visible update
         tempData.push({postId: 'NEW MESSAGE ID', user: 'This guy', body: newPost});
 
         // Save function here or below
