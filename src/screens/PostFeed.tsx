@@ -1,67 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, FlatList, Image } from 'react-native';
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-
-const data = [
-  {
-    id: 'test-id1',
-    title: 'Post 1',
-  },
-  {
-    id: 'test-id2',
-    title: 'Post 2',
-  },
-  {
-    id: 'test-id3',
-    title: 'Post 3',
-  },
-  {
-    id: 'test-id4',
-    title: 'Post 4',
-  }
-];
-
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+import PostList from '../components/postFeed/postList';
 
 export default function PostFeedScreen() { 
-  // const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  const renderItem = ({ item }) => (
-    <Item title={item.title} />
-  )
-
-  // const fetchPosts = async () => {
-  //   setLoading(true);
-  //   try {
-  //     // const postsData = await //api
-  //     // setPosts(postsData)
-  //   } catch (e) {
-  //     console.log(e)
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, []);
 
   return (
     <View style={styles.container}>
-      <FlatList
-      style={{width:'100%'}}
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-      refreshing={loading}
-      />
+      <PostList />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </View>
   );
