@@ -22,7 +22,7 @@ export default function BottomTabNavigator () {
 
     return (
         <BottomTab.Navigator
-            initialRouteName="Login"
+            initialRouteName="PostFeed"
             tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
             <BottomTab.Screen
               name="PostFeed"

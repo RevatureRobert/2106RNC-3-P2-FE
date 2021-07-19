@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { StyleSheet, FlatList, Image } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -28,22 +29,38 @@ const Item = ({ title }) => (
   </View>
 );
 
-export default function PostFeedScreen() {
+export default function PostFeedScreen() { 
+  // const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const renderItem = ({ item }) => (
     <Item title={item.title} />
   )
 
+  // const fetchPosts = async () => {
+  //   setLoading(true);
+  //   try {
+  //     // const postsData = await //api
+  //     // setPosts(postsData)
+  //   } catch (e) {
+  //     console.log(e)
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, []);
+
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.tinyLogo}
-        source={require("../assets/images/logo.png")}
-      />
-      <Text style={styles.title}>What's new?</Text>
       <FlatList
+      style={{width:'100%'}}
       data={data}
       renderItem={renderItem}
       keyExtractor={item => item.id}
+      refreshing={loading}
       />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </View>

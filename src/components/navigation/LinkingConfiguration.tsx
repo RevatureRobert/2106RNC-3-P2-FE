@@ -24,12 +24,12 @@
            },
            AddPost: {
             screens: {
-              PostFeed: 'post-feed',
+              PostFeed: 'add-post',
             },
           },
           Profile: {
             screens: {
-              PostFeed: 'post-feed',
+              PostFeed: 'profile',
             },
           },
          },
