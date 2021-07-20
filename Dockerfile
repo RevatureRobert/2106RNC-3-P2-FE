@@ -1,9 +1,6 @@
 # pull base image
-FROM node:14.13.1-buster-slim
+FROM node:14-alpine
 
-LABEL MAINTAINER=team3
-#
-LABEL HOMEPAGE=https://github.com/RevatureRobert/2106RNC-3-P2-FE
 # set our node environment, either development or production
 # defaults to production, compose overrides this to development on build and run
 ARG NODE_ENV=production
@@ -19,16 +16,12 @@ ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH /home/node/.npm-global/bin:$PATH
 RUN npm i --unsafe-perm -g npm@latest expo-cli@latest
 
-# install dependencies first, in a different location for easier app bind mounting for local development
-# due to default /opt permissions we have to create the dir with root and change perms
+# install dependencies first
 RUN mkdir /app
-
-COPY . /app 
-
 WORKDIR /app
-#["package.json", "package-lock.json*", "./"]
+COPY . /app
 RUN npm install --force
 
-
+# ENTRYPOINT ["node"]
 ENTRYPOINT ["npm", "run"]
 CMD ["web"]
