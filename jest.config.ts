@@ -18,7 +18,6 @@ module.exports = {
     ],
     coverageDirectory: 'coverage',
     preset: "jest-expo-enzyme",
-    setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
     roots: [
         "<rootDir>/src"
     ],

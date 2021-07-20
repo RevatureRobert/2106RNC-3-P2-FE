@@ -12,11 +12,11 @@
      screens: {
        Root: {
          screens: {
-           Login: {
-             screens: {
-               Login: 'login',
-             },
-           },
+          Landing: {
+            screens: {
+              Landing: 'landing',
+            },
+          },
            PostFeed: {
              screens: {
                PostFeed: 'post-feed',
@@ -24,17 +24,24 @@
            },
            AddPost: {
             screens: {
-              PostFeed: 'add-post',
+              AddPost: 'add-post',
             },
           },
           Profile: {
             screens: {
-              PostFeed: 'profile',
+              Profile: 'profile',
+            },
+          },
+          Logout: {
+            screens: {
+              Logout: 'logout',
             },
           },
          },
        },
        NotFound: '*',
+       Login: 'login',
+       Register: 'register'
      },
    },
  };

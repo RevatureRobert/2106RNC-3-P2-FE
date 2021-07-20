@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View } from '../Themed';
 import PostFlatList from './postFlatlist';
 
 const PostList = (props: any) => {
@@ -50,7 +51,7 @@ const PostList = (props: any) => {
           numberOfLines={6}
           placeholder="Type something in!"
           onChangeText={(post) => setPost(post)}/>
-        <TouchableOpacity onPress={handleAdd}>
+        <TouchableOpacity style={styles.button} onPress={handleAdd}>
           <Text style={styles.buttonText}>Post</Text>
         </TouchableOpacity>
         {/* Recommendation: data here can pass in postID. That can be used all the way down in
@@ -65,8 +66,10 @@ const styles = StyleSheet.create({
       fontSize:18,
       maxHeight:800,
       backgroundColor:"#fff",
+      margin:10,
       padding: 5,
-      width:250
+      width: 350,
+      borderRadius:10
   },
   title: {
       alignSelf: "center",
@@ -81,21 +84,25 @@ const styles = StyleSheet.create({
   },
   container: {
       flex: 1,
-      alignItems: "flex-start"
+      alignItems: "center",
+      padding: 20
   },
   container2: {
       flexDirection: "row",
       padding: 15
   },
   buttonText: {
-      paddingHorizontal: 20,
+      paddingHorizontal: 40,
       paddingVertical: 10,
       color: "white",
       fontWeight: 'bold',
       fontSize: 16,
       backgroundColor: "#d64045",
-      borderRadius: 30
+      borderRadius: 20
     },
+  button: {
+      alignSelf: "flex-end"
+  },
   headerContainer: {
       flexDirection: "row",
       justifyContent: "space-between",

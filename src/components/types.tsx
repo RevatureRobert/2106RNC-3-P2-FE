@@ -5,14 +5,16 @@
 
  export type RootStackParamList = {
     Root: undefined;
+    Login: undefined;
+    Register: undefined;
+    Landing: undefined;
     NotFound: undefined;
   };
   
   export type BottomTabParamList = {
-    Login: undefined
     PostFeed: undefined;
-    AddPost: undefined;
     Profile: undefined;
+    Logout: undefined;
   };
 
   export type LoginParamList = {
@@ -23,10 +25,10 @@
     PostFeed: undefined;
   }
 
-  export type AddPostParamList = {
-    AddPost: undefined;
-  }
-
   export type ProfileParamList = {
     Profile: undefined;
+  }
+
+  export type LogoutParamList = {
+    Logout: undefined;
   }

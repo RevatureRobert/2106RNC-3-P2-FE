@@ -1,16 +1,12 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { StyleSheet, FlatList, Image } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet } from 'react-native';
+import { View } from '../components/Themed';
 import PostList from '../components/postFeed/postList';
 
 export default function PostFeedScreen() { 
-
-
   return (
     <View style={styles.container}>
       <PostList />
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </View>
   );
 }
@@ -27,11 +23,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     padding: 10
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
   item: {
     backgroundColor: '#d3d3d3',
     padding: 20,
@@ -43,5 +34,5 @@ const styles = StyleSheet.create({
     height: 50,
     alignSelf: 'flex-start',
     padding: 20
-},
+  }
 });

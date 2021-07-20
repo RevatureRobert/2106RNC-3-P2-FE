@@ -47,42 +47,42 @@ export default function ProfileScreen(props: any) {
   return (
         <View style={styles.outerForm}>
               <View style={{flexDirection: "row"}}>
-                  <InputField placeholder="Email" label="Profile" inText={userData.Email} editable={false} />
-                  <View>
-                    <TouchableOpacity onPress={submitHandle} style={styles.buttonText}>
-                      <Text>{buttonText}</Text>
-                    </TouchableOpacity>
-                  </View>
+                  <InputField style={styles.input} placeholder="Email" label="Email/Username" inText={userData.Email} editable={false} />
               </View>
               <View style={{flexDirection: "row"}}>
               <View style={styles.container}>
                     <View style={{margin: 6}}><Text style={{color: "#eee"}}>First Name</Text></View>
-                    <TextInput style={{margin: 5, borderWidth: 1}} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
+                    <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
                   </View>
                   <View style={styles.container}>
                     <View style={{margin: 6}}><Text style={{color: "#eee"}}>Last Name</Text></View>
-                    <TextInput style={{margin: 5, borderWidth: 1}} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
+                    <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
                   </View>
               </View>
               <View style={styles.container}>
                 <View style={{margin: 6}}><Text style={{color: "#eee"}}>Birthday</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1}} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
+                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
               </View>
               <View style={styles.container}>
                 <View style={{margin: 6}}><Text style={{color: "#eee"}}>Phone Number</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1}} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
+                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
               </View>
               <View style={styles.container}>
                 <View style={{margin: 6}}><Text style={{color: "#eee"}}>Nickname</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1}} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
+                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
               </View>
               <View style={styles.container}>
                 <View style={{margin: 6}}><Text style={{color: "#eee"}}>Preferred Name</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1}} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
+                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
               </View>
               <View style={styles.container}>
                 <View style={{margin: 6}}><Text style={{color: "#eee"}}>Profile</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1}} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
+                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
+              </View>
+              <View>
+                <TouchableOpacity onPress={submitHandle}>
+                      <Text style={styles.buttonText}>{buttonText}</Text>
+                </TouchableOpacity>
               </View>
         </View>
   );
@@ -93,21 +93,24 @@ export default function ProfileScreen(props: any) {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor:"#343a40"
+      backgroundColor:"#343a40",
+      borderRadius:20
     },
     outerForm: {
       flexDirection: "column",
       height: 700,
       width: 400,
       padding: 20,
-      backgroundColor: "#30315A",
+      backgroundColor: "#343a40",
     },
     buttonText: {
-      paddingHorizontal: 10,
-      paddingVertical: 5,
+      paddingHorizontal:10,
+      paddingVertical:5,
+      textAlign:"center",
+      margin: 10,
       color: "white",
       fontWeight: 'bold',
-      fontSize: 16,
+      fontSize:20,
       backgroundColor: "#d64045",
       borderRadius: 10
     },
@@ -130,10 +133,10 @@ export default function ProfileScreen(props: any) {
     text: {
         color: "#f1ecce"
     },
-    separator: {
-      marginVertical: 30,
-      height: 1,
-      width: '80%',
+    input: {
+      backgroundColor:"#fff",
+      borderRadius: 10,
+      paddingHorizontal:50
     }
   });
   

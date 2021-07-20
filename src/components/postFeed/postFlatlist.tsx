@@ -6,13 +6,16 @@ const styles = StyleSheet.create({
   container: {
    flex: 1,
    paddingTop: 22,
-   maxHeight: 200,
-   maxWidth: 500,
+   maxHeight: 600,
+   maxWidth: 500
   },
   item: {
     padding: 10,
+    margin: 5,
     fontSize: 18,
-    height: 44,
+    height: 50,
+    backgroundColor: "#fff",
+    borderRadius:10
   },
 });
 

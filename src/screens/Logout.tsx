@@ -4,14 +4,8 @@ import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
-interface IProps {
-    name: string;
-}
 
-export default function LoginScreen(props: IProps) {
-    const [username, onChangeUsername] = useState('');
-    const [password, onChangePass] = useState('');
-
+export default function LogoutScreen() {
     // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
     //     e.preventDefault();
     //     LoginCognito.login(username, password, false)
@@ -27,26 +21,13 @@ export default function LoginScreen(props: IProps) {
                 source={require("../assets/images/logo.png")}
             />
             <View style={styles.container2}>
-                <Text style={styles.title}>Username</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={onChangeUsername}
-                value={username}
-                />
-                <Text style={styles.title}>Password</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={onChangePass}
-                value={password}
-                />
-            <View style={styles.container3}>
-                <TouchableOpacity onPress={() =>{}}>
-                    <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.title}>Are you sure you want to leave?</Text>
+                <TouchableOpacity style={styles.container3}>
+                    <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
-            </View>
-            <TouchableOpacity onPress={() => {}}>
-                    <Text style={styles.register}>I don't have an account</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.container3}>
+                    <Text style={styles.cancel}>I don't want to leave!</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -54,23 +35,24 @@ export default function LoginScreen(props: IProps) {
 
 const styles = StyleSheet.create({
     input: {
-        padding: 10,
+        paddingTop: 50,
         height: 50,
         borderWidth:2,
-        backgroundColor:"#fff",
-        borderRadius:20
+        backgroundColor:"#fff"
     },
     title: {
         alignSelf: "center",
         fontSize: 30,
-        padding: 20
+        padding: 20,
+        textAlign: "center"
     },
     tinyLogo: {
         width: 50,
         height: 50,
         alignSelf: "center",
         padding: 50,
-        marginTop: 150
+        margin: 20,
+        marginTop: 60
     },
     container: {
         flex: 1,
@@ -85,21 +67,22 @@ const styles = StyleSheet.create({
     container3: {
         flexDirection:'row',
         alignSelf: 'center',
-        padding: 20,
-        borderRadius:30
+        padding: 50,
+        borderRadius:30,
+        fontSize: 50
     },
     buttonText: {
         paddingHorizontal: 30,
         paddingVertical: 10,
         color: "white",
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 20,
         backgroundColor: "#d64045",
         borderRadius: 20
     },
-    register:{
+    cancel: {
         alignSelf: "center",
         textDecorationLine: "underline",
         fontSize: 20
-    }
+    },
 })

@@ -8,10 +8,7 @@ interface IProps {
     name: string;
 }
 
-export default function LoginScreen(props: IProps) {
-    const [username, onChangeUsername] = useState('');
-    const [password, onChangePass] = useState('');
-
+export default function LandingScreen(props: IProps) {
     // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
     //     e.preventDefault();
     //     LoginCognito.login(username, password, false)
@@ -23,31 +20,17 @@ export default function LoginScreen(props: IProps) {
     return (
         <View style={styles.container}>
             <Image
-                style={styles.tinyLogo}
-                source={require("../assets/images/logo.png")}
+                style={styles.logo}
+                source={require("../assets/images/logo_name.png")}
             />
-            <View style={styles.container2}>
-                <Text style={styles.title}>Username</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={onChangeUsername}
-                value={username}
-                />
-                <Text style={styles.title}>Password</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={onChangePass}
-                value={password}
-                />
             <View style={styles.container3}>
                 <TouchableOpacity onPress={() =>{}}>
-                    <Text style={styles.buttonText}>Login</Text>
+                    <Text style={styles.buttonText}>Get Started</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => {}}>
                     <Text style={styles.register}>I don't have an account</Text>
             </TouchableOpacity>
-            </View>
         </View>
     )
 }
@@ -65,22 +48,17 @@ const styles = StyleSheet.create({
         fontSize: 30,
         padding: 20
     },
-    tinyLogo: {
+    logo: {
         width: 50,
         height: 50,
         alignSelf: "center",
-        padding: 50,
+        padding: 225,
         marginTop: 150
     },
     container: {
         flex: 1,
         alignContent: "center",
         paddingBottom: 50,
-    },
-    container2: {
-        flex: 1,
-        alignContent: "center",
-        padding: 50
     },
     container3: {
         flexDirection:'row',
