@@ -23,7 +23,7 @@ const PostSwitch = (props: any) => {
                 <View>
                     <Text style={props.style}>User: {user}</Text>
                     <OptionalBody style={props.style} body={body}/>
-                    {/* If going off my recommendations, herein would have to be another FlatListBasics,
+                    {/* If going off my recommendations, herein would have to be another PostFlatList,
                          this time of type="comment" and data=[the relevant comments] */}
                 </View>
             );

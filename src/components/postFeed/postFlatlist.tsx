@@ -18,14 +18,21 @@ const styles = StyleSheet.create({
 
 const PostFlatList = (props: any) => {
   const postType = props.type || 'post';
+  const postData = props.data;
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={props.data}
-        renderItem={({item}) => <SinglePost type={postType} item={item} style={styles.item}/>}
+        data={postData}
+        renderItem={({item}) =>
+          <SinglePost
+            type={postType}
+            item={item}
+            style={styles.item}
+          />
+        }
         // the first "item" initializes a variable representing every item;
-        //  the next determines what the key is. It doesn't need to be .key
+        //  the next determines what the key is.
         keyExtractor={item => item.postId}
         extraData={props.data}
       />
