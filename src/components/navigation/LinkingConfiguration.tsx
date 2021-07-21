@@ -12,19 +12,31 @@
      screens: {
        Root: {
          screens: {
-           Login: {
-             screens: {
-               Login: 'login',
-             },
-           },
+          Landing: {
+            screens: {
+              Landing: 'landing',
+            },
+          },
            PostFeed: {
              screens: {
                PostFeed: 'post-feed',
              },
            },
+          Profile: {
+            screens: {
+              Profile: 'profile',
+            },
+          },
+          Logout: {
+            screens: {
+              Logout: 'logout',
+            },
+          },
          },
        },
        NotFound: '*',
+       Login: 'login',
+       Register: 'register'
      },
    },
  };

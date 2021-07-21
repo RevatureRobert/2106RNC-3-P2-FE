@@ -7,11 +7,17 @@
     Root: undefined;
     NotFound: undefined;
   };
-  
+
+  export type AuthStackParamList = {
+    Landing: undefined;
+    Login: undefined;
+    Register: undefined;
+  };
+
   export type BottomTabParamList = {
-    Login: undefined
     PostFeed: undefined;
-    AddPost: undefined;
+    Profile: undefined;
+    Logout: undefined;
   };
 
   export type LoginParamList = {
@@ -22,6 +28,14 @@
     PostFeed: undefined;
   }
 
-  export type AddPostParamList = {
-    AddPost: undefined;
+  export type ProfileParamList = {
+    Profile: undefined;
+  }
+
+  export type LogoutParamList = {
+    Logout: undefined;
+  }
+
+  export type LandingParamList = {
+    Landing: undefined;
   }
