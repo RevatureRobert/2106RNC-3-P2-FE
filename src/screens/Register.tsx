@@ -83,12 +83,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: "center",
-        backgroundColor:'#343a40'
+        backgroundColor:'#343a40',
+        padding: 40
     },
     container2: {
         flex: 1,
         alignContent: "center",
-        padding: 20,
         backgroundColor: '#343a40'
     },
     container3: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         color: "white",
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 25,
         backgroundColor: "#d64045",
         borderRadius: 20
     },

@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Image, NativeSyntheticEvent, TextInputChangeEventData, Button, TouchableOpacity } from 'react-native';
+import { 
+    StyleSheet, 
+    TextInput, 
+    Image, 
+    NativeSyntheticEvent, 
+    TextInputChangeEventData, 
+    Button, 
+    TouchableOpacity,
+    NavigationScreenComponent
+} from 'react-native';
 import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
-interface IProps {
-    name: string;
-}
 
-export default function LandingScreen(props: IProps) {
+const LandingScreen: NavigationScreenComponent<{}> = ({ navigation }) => {
     // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
     //     e.preventDefault();
     //     LoginCognito.login(username, password, false)
@@ -24,15 +30,15 @@ export default function LandingScreen(props: IProps) {
                 source={require("../assets/images/logo_name.png")}
             />
             <View style={styles.container3}>
-                <TouchableOpacity onPress={() =>{}}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.buttonText}>Get Started</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.register}>I don't have an account</Text>
             </TouchableOpacity>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -49,10 +55,8 @@ const styles = StyleSheet.create({
         padding: 20
     },
     logo: {
-        width: 50,
-        height: 50,
         alignSelf: "center",
-        padding: 225,
+        padding: 150,
         marginTop: 150
     },
     container: {
@@ -71,9 +75,9 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         color: "white",
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 25,
         backgroundColor: "#d64045",
-        borderRadius: 20
+        borderRadius: 30
     },
     register:{
         alignSelf: "center",
@@ -81,3 +85,5 @@ const styles = StyleSheet.create({
         fontSize: 20
     }
 })
+
+export default LandingScreen;

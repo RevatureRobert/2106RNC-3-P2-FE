@@ -22,11 +22,6 @@
                PostFeed: 'post-feed',
              },
            },
-           AddPost: {
-            screens: {
-              AddPost: 'add-post',
-            },
-          },
           Profile: {
             screens: {
               Profile: 'profile',

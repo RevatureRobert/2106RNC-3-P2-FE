@@ -5,12 +5,15 @@
 
  export type RootStackParamList = {
     Root: undefined;
-    Login: undefined;
-    Register: undefined;
-    Landing: undefined;
     NotFound: undefined;
   };
-  
+
+  export type AuthStackParamList = {
+    Landing: undefined;
+    Login: undefined;
+    Register: undefined;
+  };
+
   export type BottomTabParamList = {
     PostFeed: undefined;
     Profile: undefined;
@@ -31,4 +34,8 @@
 
   export type LogoutParamList = {
     Logout: undefined;
+  }
+
+  export type LandingParamList = {
+    Landing: undefined;
   }

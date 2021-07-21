@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 // The data object should have each of the below 8 attributes
 export default function ProfileScreen(props: any) {
@@ -16,7 +16,7 @@ export default function ProfileScreen(props: any) {
       Profile: "",
   });
 
-  const InputField = (props: any) => {
+  const InputField = (props) => {
     return (
         <View style={styles.container}>
             <View style={{margin: 6}}><Text style={{color: "#eee"}}>{props.label}</Text></View>
@@ -94,13 +94,12 @@ export default function ProfileScreen(props: any) {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor:"#343a40",
-      borderRadius:20
     },
     outerForm: {
+      alignSelf: 'center',
       flexDirection: "column",
       height: 700,
       width: 400,
-      padding: 20,
       backgroundColor: "#343a40",
     },
     buttonText: {
