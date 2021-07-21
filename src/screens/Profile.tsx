@@ -45,47 +45,57 @@ export default function ProfileScreen(props: any) {
   }
 
   return (
-        <View style={styles.outerForm}>
-              <View style={{flexDirection: "row"}}>
-                  <InputField style={styles.input} placeholder="Email" label="Email/Username" inText={userData.Email} editable={false} />
-              </View>
-              <View style={{flexDirection: "row"}}>
-              <View style={styles.container}>
-                    <View style={{margin: 6}}><Text style={{color: "#eee"}}>First Name</Text></View>
-                    <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
-                  </View>
-                  <View style={styles.container}>
-                    <View style={{margin: 6}}><Text style={{color: "#eee"}}>Last Name</Text></View>
-                    <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
-                  </View>
-              </View>
-              <View style={styles.container}>
-                <View style={{margin: 6}}><Text style={{color: "#eee"}}>Birthday</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
-              </View>
-              <View style={styles.container}>
-                <View style={{margin: 6}}><Text style={{color: "#eee"}}>Phone Number</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
-              </View>
-              <View style={styles.container}>
-                <View style={{margin: 6}}><Text style={{color: "#eee"}}>Nickname</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
-              </View>
-              <View style={styles.container}>
-                <View style={{margin: 6}}><Text style={{color: "#eee"}}>Preferred Name</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
-              </View>
-              <View style={styles.container}>
-                <View style={{margin: 6}}><Text style={{color: "#eee"}}>Profile</Text></View>
-                <TextInput style={{margin: 5, borderWidth: 1, backgroundColor:"#fff", borderRadius: 10, paddingHorizontal:30}} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
-              </View>
-              <View>
-                <TouchableOpacity onPress={submitHandle}>
-                      <Text style={styles.buttonText}>{buttonText}</Text>
-                </TouchableOpacity>
-              </View>
+    <View style={styles.container}>
+      <View style={{flexDirection:"row"}}>
+        <InputField style={styles.input} placeholder="Email" label="Email/Username" inText={userData.Email} editable={false} />
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>First Name</Text>
+          <TextInput style={styles.input2} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
         </View>
-  );
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>Last Name</Text>
+          <TextInput style={styles.input2} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
+        </View>
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>Birthday</Text>
+          <TextInput style={styles.input2} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
+        </View>
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>Phone Number</Text>
+          <TextInput style={styles.input2} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
+        </View>
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>Nickname</Text>
+          <TextInput style={styles.input2} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
+        </View>
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>Preferred Name</Text>
+          <TextInput style={styles.input2} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
+        </View>
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <View style={{flexDirection:"column"}}>
+          <Text style={styles.text}>Profile</Text>
+          <TextInput style={styles.input2} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
+        </View>
+      </View>
+      <View style={{flexDirection:"row"}}>
+        <TouchableOpacity onPress={submitHandle}>
+          <Text style={styles.buttonText}>{buttonText}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    );
   }
   
   const styles = StyleSheet.create({
@@ -95,12 +105,18 @@ export default function ProfileScreen(props: any) {
       justifyContent: 'center',
       backgroundColor:"#343a40",
     },
-    outerForm: {
-      alignSelf: 'center',
-      flexDirection: "column",
-      height: 700,
-      width: 400,
-      backgroundColor: "#343a40",
+    input: {
+      backgroundColor:"#fff",
+      borderRadius: 10,
+      paddingHorizontal:50,
+      paddingVertical:2.5
+    },
+    input2:{
+      margin: 5, 
+      borderWidth: 1, 
+      backgroundColor:"#fff", 
+      borderRadius: 10, 
+      paddingHorizontal:30
     },
     buttonText: {
       paddingHorizontal:10,
@@ -113,29 +129,11 @@ export default function ProfileScreen(props: any) {
       backgroundColor: "#d64045",
       borderRadius: 10
     },
-    profileImage: {
-        width: 200,
-        height: 200,
-        borderRadius: 100,
-        overflow: "hidden"
-    },
-    image: {
-        flex: 1,
-        height: undefined,
-        width: undefined
-    },
-    infoContainer: {
-        alignSelf: "center",
-        alignItems: "center",
-        marginTop: 16
-    },
     text: {
-        color: "#f1ecce"
-    },
-    input: {
-      backgroundColor:"#fff",
-      borderRadius: 10,
-      paddingHorizontal:50
+        color: "#fff",
+        textAlign:"center",
+        alignSelf:"center",
+        paddingVertical:2
     }
   });
   

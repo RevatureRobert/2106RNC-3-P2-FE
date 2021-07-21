@@ -4,24 +4,18 @@ import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
-export interface Props {
-    username: string;
-    password: string;
-    navigation:object;
-}
-
-export default function LoginScreen<Props>() {
+export default function LoginScreen({ navigation }) {
     const [username, onChangeUsername] = useState('');
     const [password, onChangePass] = useState('');
     const [isPasswordVisible, setPasswordVisible] = useState(false);
 
-    const onTouch = async(e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        LoginCognito.login(username, password, false)
-            .then((signUpResult: CognitoUser) => {
-                //redirect to home
-            }).catch(console.error)
-    }
+    // const onTouch = async(e: { preventDefault: () => void; }) => {
+    //     e.preventDefault();
+    //     LoginCognito.login(username, password, false)
+    //         .then((signUpResult: CognitoUser) => {
+    //             //redirect to home
+    //         }).catch(console.error)
+    // }
 
     return (
         <View style={styles.container}>
@@ -44,11 +38,11 @@ export default function LoginScreen<Props>() {
                 value={password}
                 />
             <View style={styles.container3}>
-                <TouchableOpacity onPress={onTouch}>
+                <TouchableOpacity onPress={() => {}}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate('Register')}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.register}>I don't have an account</Text>
             </TouchableOpacity>
             </View>
