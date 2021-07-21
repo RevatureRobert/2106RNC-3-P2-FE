@@ -4,6 +4,11 @@
 ARG VARIANT="16-buster"
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
+# default to port 19006 for node, and 19001 and 19002 (tests) for debug
+ARG PORT=19006
+ENV PORT $PORT
+EXPOSE $PORT 19001 19002
+
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
@@ -13,4 +18,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
 
 # [Optional] Uncomment if you want to install more global node packages
-# RUN su node -c "npm install -g <your-package-list -here>"
+RUN su node -c "npm install -g npm@latest expo-cli@latest"
+RUN npm install --force
+RUN npm update
