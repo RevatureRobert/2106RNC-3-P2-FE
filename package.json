@@ -6,7 +6,8 @@
     "android": "expo-cli start --android",
     "ios": "expo-cli start --ios",
     "web": "expo-cli start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "checker": "bash ./packageChecker.sh"
   },
   "jest": {
     "preset": "jest-expo/universal",
