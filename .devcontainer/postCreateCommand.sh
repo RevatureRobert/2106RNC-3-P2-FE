@@ -2,6 +2,9 @@
 npm install --force
 npm update
 
+# apt-get update
+# apt-get install android-tools-adb
+
 # # installs depcheck which goes through and will list and unused packages or missing packages
 # npm install -g depcheck
 # # npm install -g depcheck typescript
