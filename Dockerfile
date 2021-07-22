@@ -6,6 +6,9 @@ FROM node:14-alpine
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
+RUN apt-get update \
+    && apt-get -y install android-tools-adb
+
 # default to port 19006 for node, and 19001 and 19002 (tests) for debug
 ARG PORT=19006
 ENV PORT $PORT
@@ -24,4 +27,4 @@ RUN npm install --force
 
 # ENTRYPOINT ["node"]
 ENTRYPOINT ["npm", "run"]
-CMD ["web"]
+CMD ["android"]
