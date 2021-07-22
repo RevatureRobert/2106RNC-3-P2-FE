@@ -6,17 +6,20 @@
  import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
  import { createStackNavigator } from '@react-navigation/stack';
  import * as React from 'react';
- import { ColorSchemeName } from 'react-native';
- 
+ import { ColorSchemeName, Text } from 'react-native';
+ import LandingScreen from '../../screens/Landing';
+ import LoginScreen from '../../screens/Login';
  import NotFoundScreen from '../../screens/NotFoundScreen';
- import { RootStackParamList } from '../types';
+ import RegisterScreen from '../../screens/Register';
+ import { AuthStackParamList, RootStackParamList } from '../types';
  import BottomTabNavigator from './BottomTabNavigation';
  import LinkingConfiguration from './LinkingConfiguration';
  
  export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-   return (
+  return (
      <NavigationContainer
        linking={LinkingConfiguration}
+       fallback={<Text>Loading...</Text>}
        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
        <RootNavigator />
      </NavigationContainer>
@@ -35,4 +38,20 @@
      </Stack.Navigator>
    );
  }
+
+ const authStack = createStackNavigator<AuthStackParamList>();
+
+ function AuthNavigator() {
+   return(
+     <authStack.Navigator screenOptions={{headerShown: false}}>
+       <authStack.Screen name="Landing" component={LandingScreen} />
+       <authStack.Screen name="Login" component={LoginScreen} />
+       <authStack.Screen name="Register" component={RegisterScreen} />
+     </authStack.Navigator>
+   )
+ }
  
+//Still figuring out how to navigate after authentication
+ //<Stack.Screen name="Register" component={RegisterScreen} />
+ //<Stack.Screen name="Login" component={LoginScreen} />
+ //<Stack.Screen name="Landing" component={LandingScreen} />

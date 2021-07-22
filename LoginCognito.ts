@@ -7,8 +7,8 @@ import {
 } from "amazon-cognito-identity-js";
 // Reference to our user pool, this is in the wrong region but that doesn't matter since it doesn't need a vpc.
 const userPool = new CognitoUserPool({
-    UserPoolId: "us-east-2_UW3QxKzWj",
-    ClientId: "bis6ou4bf4k7i548libkei128"
+    UserPoolId: "us-east-1_L3ji90e5n",
+    ClientId: "5rii0m1j3b1dth4d32of19vdjg"
 });
 
 // Sugar to create a new user attribute for the big lists below.
@@ -44,9 +44,7 @@ function createUserAttributeList(
     firstName: string,
     lastName: string,
     birthDate: string,
-    phoneNumber: string,
     nickName: string,
-    preferredUserName: string,
     profile: string
 ) {
     return [
@@ -54,12 +52,7 @@ function createUserAttributeList(
         newUserAttribute(UserAttributeNames.firstName, firstName),
         newUserAttribute(UserAttributeNames.lastName, lastName),
         newUserAttribute(UserAttributeNames.birthDate, birthDate),
-        newUserAttribute(UserAttributeNames.phoneNumber, phoneNumber),
         newUserAttribute(UserAttributeNames.nickName, nickName),
-        newUserAttribute(
-            UserAttributeNames.preferredUserName,
-            preferredUserName
-        ),
         newUserAttribute(UserAttributeNames.profile, profile)
     ];
 }
@@ -114,9 +107,7 @@ export default class Login {
         firstName: string,
         lastName: string,
         birthDate: string,
-        phoneNumber: string,
         nickName: string,
-        preferredUserName: string,
         profile: string
     ): Promise<ISignUpResult> {
         return new Promise<ISignUpResult>((resolve, reject) => {
@@ -128,9 +119,7 @@ export default class Login {
                     firstName,
                     lastName,
                     birthDate,
-                    phoneNumber,
                     nickName,
-                    preferredUserName,
                     profile
                 ),
                 [],
