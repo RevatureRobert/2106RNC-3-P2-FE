@@ -17,6 +17,7 @@
  
  const Stack = createStackNavigator();
 
+ //navigation will not go into BottomTabNavigator as AWS cognito throws issues
  export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
      <NavigationContainer
