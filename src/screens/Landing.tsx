@@ -1,28 +1,21 @@
 import React, { useState } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import { 
     StyleSheet, 
-    TextInput, 
     Image, 
-    NativeSyntheticEvent, 
-    TextInputChangeEventData, 
-    Button, 
-    TouchableOpacity,
-    NavigationScreenComponent
+    TouchableOpacity
 } from 'react-native';
 import { Text, View } from '../components/Themed';
-import LoginCognito from '../../LoginCognito';
-import { CognitoUser } from 'amazon-cognito-identity-js';
+import { AuthStackParamList } from '../components/types';
 
+type LandingScreenNavigationProp = StackNavigationProp<
+    AuthStackParamList,
+    'Landing'
+>
 
-const LandingScreen: NavigationScreenComponent<{}> = ({ navigation }) => {
-    // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    //     e.preventDefault();
-    //     LoginCognito.login(username, password, false)
-    //         .then((signUpResult: CognitoUser) => {
-    //             //redirect to home
-    //         }).catch(console.error)
-    // }
-
+const LandingScreen = () => {
+    const navigation = useNavigation<LandingScreenNavigationProp>();
     return (
         <View style={styles.container}>
             <Image
@@ -87,3 +80,4 @@ const styles = StyleSheet.create({
 })
 
 export default LandingScreen;
+
