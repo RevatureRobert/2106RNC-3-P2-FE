@@ -11,6 +11,8 @@ ARG PORT=19006
 ENV PORT $PORT
 EXPOSE $PORT 19001 19002
 
+RUN apk update
+
 # install global packages
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH /home/node/.npm-global/bin:$PATH
@@ -22,8 +24,6 @@ WORKDIR /app
 COPY . /app
 RUN npm install --force
 
-RUN apt-get update && apt-get -y install android-tools-adb
-
 # ENTRYPOINT ["node"]
 ENTRYPOINT ["npm", "run"]
-CMD ["android"]
+CMD ["web"]

@@ -28,6 +28,8 @@
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
-    }
+    },
+    "description": "Project 2",
+    "githubUrl": "https://github.com/RevatureRobert/2106RNC-3-P2-FE"
   }
 }
