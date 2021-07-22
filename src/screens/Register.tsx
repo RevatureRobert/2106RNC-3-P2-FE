@@ -1,13 +1,33 @@
 import * as React from 'react';
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { AuthStackParamList } from '../components/types';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import Login from '../../LoginCognito';
+import { ISignUpResult } from 'amazon-cognito-identity-js';
+
+type RegisterScreenNavigationProp = StackNavigationProp<
+    AuthStackParamList,
+    'Register'
+>
 
 export default function RegisterScreen() {
+    const navigation = useNavigation<RegisterScreenNavigationProp>();
     const [username, onChangeUsername] = React.useState('');
     const [password, onChangePass] = React.useState('');
     const [first, onChangeFirst] = React.useState('');
     const [last, onChangeLast] = React.useState('');
     const [dob, onChangeDob] = React.useState('');
+
+    const onTouch = async(e: {preventDefault: () => void}) => {
+        e.preventDefault();
+        const name = username.split("@")[0]
+        Login.createAccount(name, password, username, first, last, dob, "Default profile")
+        .then((signUpResult: ISignUpResult) => {
+            navigation.navigate('Main');
+        }).catch(console.error);
+    } 
 
     return (
         <View style={styles.container}>
@@ -44,11 +64,11 @@ export default function RegisterScreen() {
                 value={password}
                 />
                 <View style={styles.container3}>
-                    <TouchableOpacity onPress={() => {}}>
+                    <TouchableOpacity onPress={onTouch}>
                         <Text style={styles.buttonText}>Register</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.login}>I already have an account</Text>
                 </TouchableOpacity>
             </View>
