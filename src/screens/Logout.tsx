@@ -3,9 +3,17 @@ import { StyleSheet, TextInput, Image, NativeSyntheticEvent, TextInputChangeEven
 import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import { BottomTabParamList } from '../components/types';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
+type LogoutScreenNavigationProp = StackNavigationProp<
+    BottomTabParamList,
+    'Logout'
+>
 
 export default function LogoutScreen() {
+    const navigation = useNavigation<LogoutScreenNavigationProp>();
     // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
     //     e.preventDefault();
     //     LoginCognito.login(username, password, false)
@@ -22,10 +30,10 @@ export default function LogoutScreen() {
             />
             <View style={styles.container2}>
                 <Text style={styles.title}>Are you sure you want to leave?</Text>
-                <TouchableOpacity style={styles.container3}>
+                <TouchableOpacity style={styles.container3} onPress={() => navigation.navigate('Landing')}>
                     <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.container3}>
+                <TouchableOpacity style={styles.container3} onPress={() => navigation.goBack()}>
                     <Text style={styles.cancel}>I don't want to leave!</Text>
                 </TouchableOpacity>
             </View>

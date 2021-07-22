@@ -19,7 +19,25 @@
 
  //navigation will not go into BottomTabNavigator as AWS cognito throws issues
  export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  return (
+  const isUserSignedIn = () => false;
+
+  if(isUserSignedIn()) {
+    return (
+      <NavigationContainer
+      linking={LinkingConfiguration}
+      fallback={<Text>Loading...</Text>}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+     <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Main" component={BottomTabNavigator} />
+        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+        <Stack.Screen name="Landing" component={LandingScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+     </Stack.Navigator>
+    </NavigationContainer>
+    )
+  } else {
+      return (
      <NavigationContainer
        linking={LinkingConfiguration}
        fallback={<Text>Loading...</Text>}
@@ -33,6 +51,9 @@
       </Stack.Navigator>
      </NavigationContainer>
    );
+  }
+
+
  }
  
  // A root stack navigator is often used for displaying modals on top of all other content
