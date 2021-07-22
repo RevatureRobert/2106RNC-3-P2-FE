@@ -15,43 +15,24 @@
  import BottomTabNavigator from './BottomTabNavigation';
  import LinkingConfiguration from './LinkingConfiguration';
  
+ const Stack = createStackNavigator();
+
  export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
      <NavigationContainer
        linking={LinkingConfiguration}
        fallback={<Text>Loading...</Text>}
        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-       <RootNavigator />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Landing" component={LandingScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Main" component={BottomTabNavigator} />
+        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      </Stack.Navigator>
      </NavigationContainer>
    );
  }
  
  // A root stack navigator is often used for displaying modals on top of all other content
  // Read more here: https://reactnavigation.org/docs/modal
- const Stack = createStackNavigator<RootStackParamList>();
- 
- function RootNavigator() {
-   return (
-     <Stack.Navigator screenOptions={{ headerShown: false }}>
-       <Stack.Screen name="Root" component={BottomTabNavigator} />
-       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-     </Stack.Navigator>
-   );
- }
-
- const authStack = createStackNavigator<AuthStackParamList>();
-
- function AuthNavigator() {
-   return(
-     <authStack.Navigator screenOptions={{headerShown: false}}>
-       <authStack.Screen name="Landing" component={LandingScreen} />
-       <authStack.Screen name="Login" component={LoginScreen} />
-       <authStack.Screen name="Register" component={RegisterScreen} />
-     </authStack.Navigator>
-   )
- }
- 
-//Still figuring out how to navigate after authentication
- //<Stack.Screen name="Register" component={RegisterScreen} />
- //<Stack.Screen name="Login" component={LoginScreen} />
- //<Stack.Screen name="Landing" component={LandingScreen} />

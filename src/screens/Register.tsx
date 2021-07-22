@@ -21,12 +21,12 @@ export default function RegisterScreen() {
     const [dob, onChangeDob] = React.useState('');
 
     const onTouch = async(e: {preventDefault: () => void}) => {
-        e.preventDefault();
-        const name = username.split("@")[0]
-        Login.createAccount(name, password, username, first, last, dob, "Default profile")
-        .then((signUpResult: ISignUpResult) => {
-            navigation.navigate('Main');
-        }).catch(console.error);
+        // e.preventDefault();
+        // const name = username.split("@")[0]
+        // Login.createAccount(name, password, username, first, last, dob, "Default profile")
+        // .then((signUpResult: ISignUpResult) => {
+        //     navigation.navigate('Main');
+        // }).catch(console.error);
     } 
 
     return (
