@@ -10,9 +10,8 @@ import React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from "../hooks/useColorScheme";
 import LogoutScreen from "../../screens/Logout";
-import { BottomTabParamList, LogoutParamList, PostFeedParamList, AddPostParamList, ProfileParamList } from '../types';
+import { BottomTabParamList, LogoutParamList, PostFeedParamList, ProfileParamList } from '../types';
 import PostFeedScreen from "../../screens/PostFeed";
-import AddPost from '../../screens/AddPost';
 import Profile from '../../screens/Profile';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();

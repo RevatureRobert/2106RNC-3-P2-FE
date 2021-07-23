@@ -15,6 +15,7 @@
     Profile: undefined;
     Logout: undefined;
     NotFound: undefined;
+    Landing: undefined;
   };
 
   export type LoginParamList = {
