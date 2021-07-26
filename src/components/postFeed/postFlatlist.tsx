@@ -36,7 +36,7 @@ const PostFlatList = (props: any) => {
         }
         // the first "item" initializes a variable representing every item;
         //  the next determines what the key is.
-        keyExtractor={item => item.postId}
+        keyExtractor={item => item.post_id}
         extraData={props.data}
       />
     </View>
