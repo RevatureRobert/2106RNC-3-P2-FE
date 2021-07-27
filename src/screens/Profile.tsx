@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 // The data object should have each of the below 8 attributes
 export default function ProfileScreen(props: any) {
@@ -46,49 +46,82 @@ export default function ProfileScreen(props: any) {
 
   return (
     <View style={styles.container}>
-      <View style={{flexDirection:"row"}}>
-        <InputField style={styles.input} placeholder="Email" label="Email/Username" inText={userData.Email} editable={false} />
+      <Image
+        style={styles.logo}
+        source={require("../assets/images/blankprofpic.png")}
+      />
+      <View style={{flexDirection:"row", margin: 10}}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start' }}>
+          <Text style={styles.text}>Email/Username</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10 }}>
+          <TextInput style={styles.input3} placeholder= 'Email' editable={false}>{userData.email}</TextInput>
+        </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start' }}>
           <Text style={styles.text}>First Name</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
         </View>
-        <View style={{flexDirection:"column"}}>
+      </View>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Last Name</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Birthday</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Phone Number</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Nickname</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Preferred Name</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'center', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Profile</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
           <TextInput style={styles.input2} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
         </View>
       </View>
+
       <View style={{flexDirection:"row"}}>
         <TouchableOpacity onPress={submitHandle}>
           <Text style={styles.buttonText}>{buttonText}</Text>
@@ -118,22 +151,34 @@ export default function ProfileScreen(props: any) {
       borderRadius: 10, 
       paddingHorizontal:30
     },
+    input3:{
+      paddingVertical: 2.5,
+      backgroundColor:"#9fc2cc", 
+      borderRadius: 10, 
+      paddingHorizontal:50
+    },
     buttonText: {
-      paddingHorizontal:10,
+      paddingHorizontal:20,
       paddingVertical:5,
       textAlign:"center",
-      margin: 10,
+      margin: 20,
       color: "white",
       fontWeight: 'bold',
       fontSize:20,
       backgroundColor: "#d64045",
-      borderRadius: 10
+      borderRadius: 30
     },
     text: {
         color: "#fff",
         textAlign:"center",
         alignSelf:"center",
         paddingVertical:2
-    }
+    },
+    logo: {
+      alignSelf: "center",
+      padding: 10, 
+      width:70,
+      height:70
+  },
   });
   

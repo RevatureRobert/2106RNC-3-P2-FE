@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
@@ -18,33 +18,46 @@ export default function LoginScreen() {
     const [password, onChangePass] = useState('');
 
     const onTouch = async(e: { preventDefault: () => void }) => {
-        e.preventDefault();
-        LoginCognito.login(username, password, false)
-            .then((signUpResult: CognitoUser) => {
-                //redirect to home
-                navigation.navigate('Main');
-            }).catch(console.error)
+        navigation.navigate('Main');
+        // e.preventDefault();
+        // LoginCognito.login(username, password, false)
+        //     .then((signUpResult: CognitoUser) => {
+        //         //redirect to home
+        //         navigation.navigate('Main');
+        //     }).catch(console.error)
     }
 
+    const ref1 = useRef();
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.header}>Sign in to your account</Text>
-            <Image
-                style={styles.tinyLogo}
-                source={require("../assets/images/logo.png")}
-            />
             <View style={styles.container2}>
                 <Text style={styles.title}>Username</Text>
                 <TextInput
                 style={styles.input}
                 onChangeText={(text: string) => onChangeUsername(text)}
                 value={username}
+                textContentType='username'
+                returnKeyType='next'
+                autoCompleteType='email'
+                clearButtonMode='while-editing'
+                keyboardType='email-address'
+                autoFocus={true}
+                onSubmitEditing={() => ref1.current.focus()}
                 />
                 <Text style={styles.title}>Password</Text>
                 <TextInput
                 style={styles.input}
                 onChangeText={(text: string) => onChangePass(text)}
                 value={password}
+                secureTextEntry={true}
+                autoCompleteType='password'
+                textContentType='password'
+                clearButtonMode='while-editing'
+                returnKeyType='done'
+                ref={ref1}
+                autoFocus={true}
                 />
             <View style={styles.container3}>
                 <TouchableOpacity onPress={onTouch}>
@@ -52,10 +65,10 @@ export default function LoginScreen() {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                    <Text style={styles.register}>I don't have an account</Text>
+                    <Text style={styles.register}>I don't have an account.</Text>
             </TouchableOpacity>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -69,8 +82,8 @@ const styles = StyleSheet.create({
     },
     header: {
         textAlign: "center",
-        fontSize: 40,
-        marginTop: 50
+        fontSize: 25,
+        paddingVertical:20
     },
     title: {
         alignSelf: "center",
@@ -82,17 +95,20 @@ const styles = StyleSheet.create({
         width:100,
         alignSelf: "center",
         padding: 5,
-        marginTop: 10,
+        marginTop: 20,
         marginBottom:10
     },
     container: {
         flex: 1,
         alignContent: "center",
-        padding: 60
+        padding: 20,
+        backgroundColor:"#343a40",
+        paddingTop: 100
     },
     container2: {
         flex: 1,
         alignContent: "center",
+        paddingTop: 20
     },
     container3: {
         flexDirection:'row',

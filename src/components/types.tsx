@@ -37,3 +37,7 @@
   export type LandingParamList = {
     Landing: undefined;
   }
+
+  export type RegisterParamList = {
+    Register: undefined;
+  }
