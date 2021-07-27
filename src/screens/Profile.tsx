@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 // The data object should have each of the below 8 attributes
 export default function ProfileScreen(props: any) {
@@ -43,8 +43,16 @@ export default function ProfileScreen(props: any) {
           ...userData,
           [key]: target.value});
   }
+  
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const ref4 = useRef();
+  const ref5 = useRef();
+  const ref6 = useRef();
 
   return (
+    <ScrollView style={{backgroundColor: '#343a40'}}>
     <View style={styles.container}>
       <Image
         style={styles.logo}
@@ -64,7 +72,16 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>First Name</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
+          <TextInput 
+          style={styles.input2} 
+          value={userData.FirstName} 
+          placeholder='First Name' 
+          editable={editable} 
+          onChange={(e) => manageEdits('FirstName', e)}
+          autoFocus={true}
+          onSubmitEditing={() => ref1.current.focus()}
+          returnKeyType='next'
+          />
         </View>
       </View>
 
@@ -73,7 +90,17 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>Last Name</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
+          <TextInput 
+          style={styles.input2} 
+          value={userData.LastName} 
+          placeholder='Last Name' 
+          editable={editable} 
+          onChange={(e) => manageEdits('LastName', e)}
+          ref={ref1}
+          autoFocus={true}
+          onSubmitEditing={() => ref2.current.focus()}
+          returnKeyType='next' 
+          />
         </View>
       </View>
 
@@ -82,7 +109,17 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>Birthday</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
+          <TextInput 
+          style={styles.input2} 
+          value={userData.BirthDate} 
+          placeholder='MM/DD/YYYY' 
+          editable={editable} 
+          onChange={(e) => manageEdits('BirthDate', e)}
+          ref={ref2}
+          autoFocus={true}
+          onSubmitEditing={() => ref3.current.focus()} 
+          returnKeyType='next' 
+          />
         </View>
       </View>
 
@@ -91,7 +128,17 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>Phone Number</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
+          <TextInput 
+          style={styles.input2} 
+          value={userData.PhoneNumber} 
+          placeholder='Phone number' 
+          editable={editable} 
+          onChange={(e) => manageEdits('PhoneNumber', e)}
+          ref={ref3}
+          autoFocus={true}
+          onSubmitEditing={() => ref4.current.focus()}
+          returnKeyType='next'         
+          />
         </View>
       </View>
 
@@ -100,7 +147,17 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>Nickname</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
+          <TextInput 
+          style={styles.input2} 
+          value={userData.NickName} 
+          placeholder='Nickname' 
+          editable={editable} 
+          onChange={(e) => manageEdits('NickName', e)}
+          ref={ref4}
+          autoFocus={true}
+          onSubmitEditing={() => ref5.current.focus()}
+          returnKeyType='next'  
+          />
         </View>
       </View>
 
@@ -109,7 +166,17 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>Preferred Name</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
+          <TextInput 
+          style={styles.input2} 
+          value={userData.PreferredName} 
+          placeholder='Preferred Name' 
+          editable={editable} 
+          onChange={(e) => manageEdits('PreferredName', e)} 
+          ref={ref5}
+          autoFocus={true}
+          onSubmitEditing={() => ref6.current.focus()}
+          returnKeyType='next' 
+          />
         </View>
       </View>
 
@@ -118,7 +185,18 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.text}>Profile</Text>
         </View>
         <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
-          <TextInput style={styles.input2} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
+          <TextInput 
+          style={styles.input2} 
+          multiline={true} 
+          numberOfLines={3} 
+          value={userData.Profile} 
+          placeholder='Write something about you!' 
+          editable={editable} 
+          onChange={(e) => manageEdits('Profile', e)}
+          ref={ref6}
+          autoFocus={true}
+          returnKeyType='done'
+          />
         </View>
       </View>
 
@@ -127,7 +205,8 @@ export default function ProfileScreen(props: any) {
           <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      </View>
+    </ScrollView>
     );
   }
   
@@ -137,6 +216,7 @@ export default function ProfileScreen(props: any) {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor:"#343a40",
+      padding: 20
     },
     input: {
       backgroundColor:"#fff",
@@ -149,7 +229,9 @@ export default function ProfileScreen(props: any) {
       borderWidth: 1, 
       backgroundColor:"#fff", 
       borderRadius: 10, 
-      paddingHorizontal:30
+      paddingHorizontal:20,
+      maxWidth: 300
+
     },
     input3:{
       paddingVertical: 2.5,
@@ -179,6 +261,6 @@ export default function ProfileScreen(props: any) {
       padding: 10, 
       width:70,
       height:70
-  },
+    },
   });
   
