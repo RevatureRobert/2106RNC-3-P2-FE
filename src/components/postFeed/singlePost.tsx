@@ -21,8 +21,9 @@ const PostSwitch = (props: any) => {
         case 'post':
             return (
                 <View>
-                    <Text style={props.style}>User: {user}</Text>
+                    <Text style={props.style}>User: {user} {"\n"}{"\n"}
                     <OptionalBody style={props.style} body={body}/>
+                    </Text>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,
                          this time of type="comment" and data=[the relevant comments] */}
                 </View>

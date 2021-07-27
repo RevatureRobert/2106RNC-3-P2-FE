@@ -15,6 +15,7 @@
     Profile: undefined;
     Logout: undefined;
     NotFound: undefined;
+    Landing: undefined;
   };
 
   export type LoginParamList = {
@@ -35,4 +36,8 @@
 
   export type LandingParamList = {
     Landing: undefined;
+  }
+
+  export type RegisterParamList = {
+    Register: undefined;
   }

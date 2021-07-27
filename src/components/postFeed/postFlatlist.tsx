@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     fontSize: 18,
-    height: 50,
+    // height: 50, // i commented out the height because the container wasnt growing even if the text did
     backgroundColor: "#fff",
     borderRadius:10
   },

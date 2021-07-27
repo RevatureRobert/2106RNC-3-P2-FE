@@ -24,7 +24,7 @@ const LandingScreen = () => {
             />
             <View style={styles.container3}>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.buttonText}>Get Started</Text>
+                    <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
