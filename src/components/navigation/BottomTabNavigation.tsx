@@ -5,7 +5,7 @@
 
 import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from "../hooks/useColorScheme";
@@ -13,6 +13,7 @@ import LogoutScreen from "../../screens/Logout";
 import { BottomTabParamList, LogoutParamList, PostFeedParamList, ProfileParamList } from '../types';
 import PostFeedScreen from "../../screens/PostFeed";
 import Profile from '../../screens/Profile';
+import Navigation from ".";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -22,7 +23,9 @@ export default function BottomTabNavigator () {
     return (
         <BottomTab.Navigator
             initialRouteName="PostFeed"
-            tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+            tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+            backBehavior='history'    
+        >
             <BottomTab.Screen
               name="PostFeed"
               component={PostFeedNavigator}
@@ -77,11 +80,13 @@ function LogoutNavigator() {
           headerTitle: "Logout",
           headerTitleStyle: {
             color: "#1d3354",
-            alignSelf: "flex-end"
+            alignSelf: "center"
+            
           },
           headerStyle: {
             backgroundColor:'#9fc2cc'
-          }
+          },
+          headerLeft: () => {return null}
         }}
       />
     </LogoutStack.Navigator>
@@ -97,14 +102,15 @@ function PostFeedNavigator() {
         name="PostFeed"
         component={PostFeedScreen}
         options={{ 
-          headerTitle: "What's New?",
+          headerTitle: "Post Feed",
           headerTitleStyle: {
             color: "#1d3354",
-            alignSelf: "flex-end"
+            alignSelf: "center"
           },
           headerStyle: {
             backgroundColor:'#9fc2cc'
-          }
+          },
+          headerLeft: () => {return null}
         }}
       />
     </PostFeedStack.Navigator>
@@ -123,12 +129,13 @@ function ProfileNavigator() {
           headerTitle: "Profile",
           headerTitleStyle: {
             color: "#1d3354",
-            alignSelf: "flex-end"
+            alignSelf: "center"
           },
           headerStyle: {
             backgroundColor:'#9fc2cc'
-          }}
-        }
+          },
+          headerLeft: () => {return null}
+        }}
       />
     </ProfileStack.Navigator>
   );

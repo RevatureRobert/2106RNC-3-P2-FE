@@ -12,11 +12,6 @@
      screens: {
        Root: {
          screens: {
-          Landing: {
-            screens: {
-              Landing: 'landing',
-            },
-          },
            PostFeed: {
              screens: {
                PostFeed: 'post-feed',
@@ -35,6 +30,7 @@
          },
        },
        NotFound: '*',
+       Landing: 'landing',
        Login: 'login',
        Register: 'register'
      },
