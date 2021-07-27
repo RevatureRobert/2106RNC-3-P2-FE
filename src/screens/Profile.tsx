@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 // The data object should have each of the below 8 attributes
 export default function ProfileScreen(props: any) {
@@ -43,58 +43,170 @@ export default function ProfileScreen(props: any) {
           ...userData,
           [key]: target.value});
   }
+  
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const ref4 = useRef();
+  const ref5 = useRef();
+  const ref6 = useRef();
 
   return (
+    <ScrollView style={{backgroundColor: '#343a40'}}>
     <View style={styles.container}>
-      <View style={{flexDirection:"row"}}>
-        <InputField style={styles.input} placeholder="Email" label="Email/Username" inText={userData.Email} editable={false} />
+      <Image
+        style={styles.logo}
+        source={require("../assets/images/blankprofpic.png")}
+      />
+      <View style={{flexDirection:"row", margin: 10}}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start' }}>
+          <Text style={styles.text}>Email/Username</Text>
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10 }}>
+          <TextInput style={styles.input3} placeholder= 'Email' editable={false}>{userData.email}</TextInput>
+        </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start' }}>
           <Text style={styles.text}>First Name</Text>
-          <TextInput style={styles.input2} value={userData.FirstName} placeholder='First Name' editable={editable} onChange={(e) => manageEdits('FirstName', e)} />
         </View>
-        <View style={{flexDirection:"column"}}>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          value={userData.FirstName} 
+          placeholder='First Name' 
+          editable={editable} 
+          onChange={(e) => manageEdits('FirstName', e)}
+          autoFocus={true}
+          onSubmitEditing={() => ref1.current.focus()}
+          returnKeyType='next'
+          />
+        </View>
+      </View>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Last Name</Text>
-          <TextInput style={styles.input2} value={userData.LastName} placeholder='Last Name' editable={editable} onChange={(e) => manageEdits('LastName', e)} />
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          value={userData.LastName} 
+          placeholder='Last Name' 
+          editable={editable} 
+          onChange={(e) => manageEdits('LastName', e)}
+          ref={ref1}
+          autoFocus={true}
+          onSubmitEditing={() => ref2.current.focus()}
+          returnKeyType='next' 
+          />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Birthday</Text>
-          <TextInput style={styles.input2} value={userData.BirthDate} placeholder='MM/DD/YYYY' editable={editable} onChange={(e) => manageEdits('BirthDate', e)} />
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          value={userData.BirthDate} 
+          placeholder='MM/DD/YYYY' 
+          editable={editable} 
+          onChange={(e) => manageEdits('BirthDate', e)}
+          ref={ref2}
+          autoFocus={true}
+          onSubmitEditing={() => ref3.current.focus()} 
+          returnKeyType='next' 
+          />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Phone Number</Text>
-          <TextInput style={styles.input2} value={userData.PhoneNumber} placeholder='Phone number' editable={editable} onChange={(e) => manageEdits('PhoneNumber', e)} />
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          value={userData.PhoneNumber} 
+          placeholder='Phone number' 
+          editable={editable} 
+          onChange={(e) => manageEdits('PhoneNumber', e)}
+          ref={ref3}
+          autoFocus={true}
+          onSubmitEditing={() => ref4.current.focus()}
+          returnKeyType='next'         
+          />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Nickname</Text>
-          <TextInput style={styles.input2} value={userData.NickName} placeholder='Nickname' editable={editable} onChange={(e) => manageEdits('NickName', e)} />
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          value={userData.NickName} 
+          placeholder='Nickname' 
+          editable={editable} 
+          onChange={(e) => manageEdits('NickName', e)}
+          ref={ref4}
+          autoFocus={true}
+          onSubmitEditing={() => ref5.current.focus()}
+          returnKeyType='next'  
+          />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Preferred Name</Text>
-          <TextInput style={styles.input2} value={userData.PreferredName} placeholder='Preferred Name' editable={editable} onChange={(e) => manageEdits('PreferredName', e)} />
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          value={userData.PreferredName} 
+          placeholder='Preferred Name' 
+          editable={editable} 
+          onChange={(e) => manageEdits('PreferredName', e)} 
+          ref={ref5}
+          autoFocus={true}
+          onSubmitEditing={() => ref6.current.focus()}
+          returnKeyType='next' 
+          />
         </View>
       </View>
-      <View style={{flexDirection:"row"}}>
-        <View style={{flexDirection:"column"}}>
+
+      <View style={{flexDirection:"row", margin: 10 }}>
+        <View style={{flexDirection:"column", alignSelf: 'center', justifyContent: 'flex-start'}}>
           <Text style={styles.text}>Profile</Text>
-          <TextInput style={styles.input2} multiline={true} numberOfLines={3} value={userData.Profile} placeholder='Write something about you!' editable={editable} onChange={(e) => manageEdits('Profile', e)} />
+        </View>
+        <View style={{flexDirection:"column", justifyContent: 'flex-end', marginStart:10}}>
+          <TextInput 
+          style={styles.input2} 
+          multiline={true} 
+          numberOfLines={3} 
+          value={userData.Profile} 
+          placeholder='Write something about you!' 
+          editable={editable} 
+          onChange={(e) => manageEdits('Profile', e)}
+          ref={ref6}
+          autoFocus={true}
+          returnKeyType='done'
+          />
         </View>
       </View>
+
       <View style={{flexDirection:"row"}}>
         <TouchableOpacity onPress={submitHandle}>
           <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      </View>
+    </ScrollView>
     );
   }
   
@@ -104,6 +216,7 @@ export default function ProfileScreen(props: any) {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor:"#343a40",
+      padding: 20
     },
     input: {
       backgroundColor:"#fff",
@@ -116,24 +229,38 @@ export default function ProfileScreen(props: any) {
       borderWidth: 1, 
       backgroundColor:"#fff", 
       borderRadius: 10, 
-      paddingHorizontal:30
+      paddingHorizontal:20,
+      maxWidth: 300
+
+    },
+    input3:{
+      paddingVertical: 2.5,
+      backgroundColor:"#9fc2cc", 
+      borderRadius: 10, 
+      paddingHorizontal:50
     },
     buttonText: {
-      paddingHorizontal:10,
+      paddingHorizontal:20,
       paddingVertical:5,
       textAlign:"center",
-      margin: 10,
+      margin: 20,
       color: "white",
       fontWeight: 'bold',
       fontSize:20,
       backgroundColor: "#d64045",
-      borderRadius: 10
+      borderRadius: 30
     },
     text: {
         color: "#fff",
         textAlign:"center",
         alignSelf:"center",
         paddingVertical:2
-    }
+    },
+    logo: {
+      alignSelf: "center",
+      padding: 10, 
+      width:70,
+      height:70
+    },
   });
   
