@@ -3,15 +3,19 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
- export type RootStackParamList = {
-    Root: undefined;
-    NotFound: undefined;
+  export type AuthStackParamList = {
+    Landing: undefined;
+    Login: undefined;
+    Register: undefined;
+    Main: undefined;
   };
-  
+
   export type BottomTabParamList = {
-    Login: undefined
     PostFeed: undefined;
-    AddPost: undefined;
+    Profile: undefined;
+    Logout: undefined;
+    NotFound: undefined;
+    Landing: undefined;
   };
 
   export type LoginParamList = {
@@ -22,6 +26,14 @@
     PostFeed: undefined;
   }
 
-  export type AddPostParamList = {
-    AddPost: undefined;
+  export type ProfileParamList = {
+    Profile: undefined;
+  }
+
+  export type LogoutParamList = {
+    Logout: undefined;
+  }
+
+  export type LandingParamList = {
+    Landing: undefined;
   }

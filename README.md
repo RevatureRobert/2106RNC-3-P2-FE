@@ -30,6 +30,8 @@ Rewrite your Project 1 using the following technologies:
 5. CI/CD Pipeline implementation using AWS CodePipeline.
 6. Lambda functions deployed as containers.
 
+- [API Documentation](https://documenter.getpostman.com/view/16168422/TzsYM8oz)
+
 ---
 
 **Front end**

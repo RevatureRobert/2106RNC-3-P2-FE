@@ -1,11 +1,9 @@
-import {describe} from "@jest/globals";
-import {User} from "../../redux/action-types/UserActionTypes";
-import {mount} from "enzyme";
-import UserDataForm from "./UserProfile";
-import {Button, Container, Row, Input} from "reactstrap";
-import {element} from "prop-types";
+// import {describe} from "@jest/globals";
+import React from 'react';
+import ProfileScreen from "../../screens/Profile";
+import renderer from 'react-test-renderer';
 
-const testUser: User = {
+const testUser = {
     userName: "Jimothy@nomod.net",
     password: "passward",
     firstName: "Jimmy",
@@ -17,27 +15,9 @@ const testUser: User = {
     profile: "This is James here, call me Jimothy."
 };
 
-describe("<UserDataForm />", () => {
-    const testForm = mount(<UserDataForm {...testUser} />);
-
-    it("should create a container", () => {
-        expect(testForm.find(Container)).toHaveLength(1);
-    });
-
-    it("should not be editable yet", () => {
-        // If this looks complex...it is.
-        // You grab the properties of the properties of each element in the array of HTML given
-        testForm.find(Input).forEach((elem) => {
-            expect(elem.getElement().props).toHaveProperty("disabled", true);
-        });
-    });
-
-    it("should become editable when edit is clicked", () => {
-        testForm.find(Button).simulate("click");
-        expect(
-            testForm.find(Input).findWhere((elem) => {
-                return elem.getElement().props.disabled == false;
-            })
-        ).toHaveLength(14);
-    });
+describe("Profile Screen", () => {
+    const profile = renderer.create(<ProfileScreen data={testUser} />).root;
+    it('should display first name properly', () => {
+        expect(profile.findByProps({placeholder: 'First Name'}).props.value).toEqual('Jimmy');
+    })
 });
