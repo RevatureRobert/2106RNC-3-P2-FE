@@ -27,6 +27,7 @@ const PostList = (props: any) => {
     const [data, setData] = useState(DEFAULT);
     const user = props.user || 'DefaultUser@email.com';
     const [post, setPost] = useState('');
+    const [buttonText, setButtonText] = useState('Wave')
     let textInput: TextInput | null;
 
     var getData: any;
@@ -45,6 +46,22 @@ const PostList = (props: any) => {
         });
     }
 
+    const sendPost = async (newPost: string) => {
+      try {
+        await axios.post("http://localhost:3001/api/home/post/addpost", {
+        socialPosts:{
+              userName: user,
+              postText: newPost,
+            },
+          }
+        );
+        // routeChange();
+        setLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     function handleAdd() {
       // Gets the input from the state hook
       const newPost = post.trim();
@@ -54,29 +71,39 @@ const PostList = (props: any) => {
         textInput.clear();
       }
       setPost('');
+      setButtonText('Wave');
 
       if (newPost != '') {
 
         // Use of the spread operator here is NECESSARY for live
         //  re-rendering of the flatlist component
         // const tempData = [...data];
-        const postData = {"socialPosts": {"postText": newPost, "userName": user}};
 
-        var postConfig = {
-          method: 'post',
-          url: 'https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          data : postData
-        };
 
-        axios(postConfig)
-          .then(function (response: any) {
-            console.log(JSON.stringify(response.data));
-            setLoading(true);
-          })
-          .catch(function (error: any) {
-            console.log(error);
-          });
+        // const postData = {
+        //   socialPosts: {
+        //     postText: newPost,
+        //     userName: user
+        //   }
+        // };
+
+        // var postConfig = {
+        //   method: 'post',
+        //   url: 'https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost',
+        //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //   data : postData
+        // };
+
+        sendPost(newPost);
+
+        // axios(postConfig)
+        //   .then(function (response: any) {
+        //     console.log(JSON.stringify(response.data));
+        //     setLoading(true);
+        //   })
+        //   .catch(function (error: any) {
+        //     console.log(error);
+        //   });
         
         /*Deprecated* - used when post data was hardcoded, for testing purposes*/
         // Herein is the data saved for a visible update
@@ -110,9 +137,16 @@ const PostList = (props: any) => {
           multiline={true}
           numberOfLines={6}
           placeholder={`Type something in, ${user}!"`}
-          onChangeText={(post) => setPost(post)}/>
+          onChangeText={(post) => {
+            if (post.trim() != '') {
+              setButtonText('Post')
+            } else {
+              setButtonText('Wave')
+            }
+            setPost(post)
+            }}/>
         <TouchableOpacity style={styles.button} onPress={handleAdd}>
-          <Text style={styles.buttonText}>Post</Text>
+          <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
         {/* Recommendation: data here can pass in postID. That can be used all the way down in
              SinglePost to retrieve all comments using postID as parentID. */}
