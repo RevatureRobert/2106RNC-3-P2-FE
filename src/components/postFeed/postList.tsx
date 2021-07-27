@@ -25,7 +25,7 @@ const PostList = (props: any) => {
     
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(DEFAULT);
-    const user = props.user || 'Default User';
+    const user = props.user || 'DefaultUser@email.com';
     const [post, setPost] = useState('');
     let textInput: TextInput | null;
 
@@ -60,12 +60,12 @@ const PostList = (props: any) => {
         // Use of the spread operator here is NECESSARY for live
         //  re-rendering of the flatlist component
         // const tempData = [...data];
-        const postData = `{\r\n    "socialPosts": {\r\n        "postText": "${newPost}",\r\n        "userName": "${user}"\r\n    }\r\n}`;
+        const postData = {"socialPosts": {"postText": newPost, "userName": user}};
 
         var postConfig = {
           method: 'post',
           url: 'https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost',
-          headers: { },
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           data : postData
         };
 
