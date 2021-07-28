@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { Console } from 'console';
+import axios from '../axiosConfig';
 import { Dispatch } from 'redux';
 import { UserAPIType, UserDispatchTypes, USER_FAIL, USER_LOADING, USER_SUCCESS } from '../action-types/UserTypes';
 
@@ -9,7 +8,7 @@ export const GetUser = (username: string) => async (dispatch: Dispatch <UserDisp
             type: USER_LOADING
         })
 
-        const res = await axios.get(`${}/user/${username}`);
+        const res = await axios.get(`/getuser/${username}`);
         dispatch({
             type: USER_SUCCESS,
             payload: res.data
@@ -27,8 +26,8 @@ export const PostUser = (params: UserAPIType) => async(dispatch: Dispatch<UserDi
             type: USER_LOADING
         })
         const body = {nickName: params.nickName};
-        await axios.put(`${}/user/${params.username}/nickName`, body)
-            .then(function (res) {
+        await axios.put(`/update/${params.username}/nickName`, body)
+            .then((res) => {
                 dispatch({
                     type: USER_SUCCESS,
                     payload: res.data
@@ -47,8 +46,8 @@ export const CreateUser = (user: {}) => async (dispatch: Dispatch<UserDispatchTy
             type: USER_LOADING
         })
 
-        await axios.post(`${}/user`, user)
-            .then(function (res){
+        await axios.post(`/add`, user)
+            .then((res) => {
                 dispatch({
                     type: USER_SUCCESS,
                     payload: res.data
@@ -67,8 +66,8 @@ export const DeleteUser = (user: string) => async(dispatch: Dispatch<UserDispatc
             type: USER_LOADING
         })
         const body = {data: {username: user}};
-        await axios.delete(`${}/user/${user}`, body)
-        .then(function (res){
+        await axios.delete(`/delete/${user}`, body)
+        .then((res) => {
             dispatch({
                 type: USER_SUCCESS,
                 payload: res.data

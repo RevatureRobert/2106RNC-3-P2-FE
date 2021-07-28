@@ -18,13 +18,12 @@ export default function LoginScreen() {
     const [password, onChangePass] = useState('');
 
     const onTouch = async(e: { preventDefault: () => void }) => {
-        navigation.navigate('Main');
-        // e.preventDefault();
-        // LoginCognito.login(username, password, false)
-        //     .then((signUpResult: CognitoUser) => {
-        //         //redirect to home
-        //         navigation.navigate('Main');
-        //     }).catch(console.error)
+        e.preventDefault();
+        LoginCognito.login(username, password, false)
+            .then((signUpResult: CognitoUser) => {
+                //redirect to home
+                navigation.navigate('Main');
+            }).catch(console.error)
     }
 
     const ref1 = useRef();
