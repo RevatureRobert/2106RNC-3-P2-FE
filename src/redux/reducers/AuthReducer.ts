@@ -9,7 +9,7 @@ const initialState: AuthState = {
     success: ''
 };
 
-export default (state = initialState, action: AuthAction) => {
+export default (state: AuthState = initialState, action: AuthAction) => {
     switch (action.type) {
         case SET_USER:
             return {

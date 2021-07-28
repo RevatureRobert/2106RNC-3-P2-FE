@@ -1,12 +1,18 @@
+import { Auth } from 'aws-amplify';
 import React, { useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { GestureResponderEvent, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import LoginCognito from '../../LoginCognito';
+import { RootStore } from '../redux/store';
+
 
 // The data object should have each of the below 8 attributes
 export default function ProfileScreen(props: any) {
+  const currentUser = useSelector((state: RootStore) => state.auth.user);
   const [editable, toggleEditing] = useState(false);
   const [buttonText, setButtonText] = useState("Edit");
   const [userData, setUserData] = useState(props.data || {
-      Email: "",
+      Email: currentUser,
       FirstName: "",
       LastName: "",
       BirthDate: "",
@@ -16,25 +22,23 @@ export default function ProfileScreen(props: any) {
       Profile: "",
   });
 
-  const InputField = (props) => {
-    return (
-        <View style={styles.container}>
-            <View style={{margin: 6}}><Text style={{color: "#eee"}}>{props.label}</Text></View>
-            <TextInput style={{margin: 5, borderWidth: 1}} {...props} />
-        </View>
-    );
-  };
+  const fetchUserData = (text: any, content: any) => {
+    //get the current user
+    Auth.currentCredentials();
+    return
 
-  const submitHandle = (e: any) => {
-      toggleEditing(() => {return !editable});
-      if (!editable) {
-          setButtonText("Save");
-      } else {
-          setButtonText("Edit");
-          // Here's where you can properly save edited data
-          
-          console.log(userData);
-      }
+  }
+
+  const submitHandle = (e: GestureResponderEvent) => {
+    e.preventDefault();
+    toggleEditing(() => {return !editable});
+    if (!editable) {
+      setButtonText("Save");
+    } else {
+      setButtonText("Edit");
+      // Here's where you can properly save edited data
+      console.log(userData);
+    }
   }
 
   const manageEdits = (key: string, e: any) => {
