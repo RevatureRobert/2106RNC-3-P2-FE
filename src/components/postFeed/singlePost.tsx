@@ -10,7 +10,11 @@ const OptionalBody = (props: any) => {
         return null;
     }
 }
-
+function convertDate(date: string | number | Date) {
+    function pad(s: string | number) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(date)
+    return [pad(d.getMonth()+1),pad(d.getDate()), d.getFullYear()].join('-')
+}
 const PostSwitch = (props: any) => {
     const type = props.type;
     const item = props.item;
@@ -25,7 +29,7 @@ const PostSwitch = (props: any) => {
                 <View>
                     <Text style={props.style}>
                     <Text style={styles.user}>{user} {"\n"}</Text>
-                    <Text style={props.style}>{date} {"\n"}{"\n"}</Text>
+                    <Text style={{alignSelf: 'flex-end'}}>{convertDate(date)} {"\n"}{"\n"}</Text>
                     <OptionalBody style={props.style} body={body}/>
                     </Text>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,

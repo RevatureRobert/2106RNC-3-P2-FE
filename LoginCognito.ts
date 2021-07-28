@@ -50,8 +50,8 @@ function createUserAttributeList(
         newUserAttribute(UserAttributeNames.email, email),
         newUserAttribute(UserAttributeNames.firstName, firstName),
         newUserAttribute(UserAttributeNames.lastName, lastName),
-        newUserAttribute(UserAttributeNames.birthDate, birthDate),
-        newUserAttribute(UserAttributeNames.nickName, nickName)
+        newUserAttribute(UserAttributeNames.birthDate, birthDate)
+        // newUserAttribute(UserAttributeNames.nickName, nickName)
     ];
 }
 

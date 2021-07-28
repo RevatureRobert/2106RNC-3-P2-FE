@@ -23,7 +23,7 @@ const PostList = (props: any) => {
         {post_id: 'WORDSS', username: 'Dominic'},
         {post_id: 'TESTIN', username: 'Jackson'},
       ]
-    
+
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(DEFAULT);
     const user = props.user || 'DefaultUser@email.com';
@@ -47,18 +47,18 @@ const PostList = (props: any) => {
         });
     }
 
+    
     const sendPost = async (newPost: string) => {
       try {
-        // const x = String(await login.getUserName());
+        const x = String(await login.getUserName());
         // console.log(x, newPost);
         await axios.post("https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost", {
         socialPosts:{
-              userName: user,
+              userName: x,
               postText: newPost,
             },
           }
         );
-        // routeChange();
         setLoading(true);
       } catch (err) {
         console.log(err);
@@ -124,7 +124,6 @@ const PostList = (props: any) => {
       );
   
     }
-
     return (
       <View style={styles.container}>
         <TextInput
