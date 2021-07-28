@@ -15,18 +15,22 @@ type RegisterScreenNavigationProp = StackNavigationProp<
 
 export default function RegisterScreen(this: any) {
     const navigation = useNavigation<RegisterScreenNavigationProp>();
-    const [username, onChangeUsername] = React.useState('');
+    const [email, onChangeEmail] = React.useState('');
     const [password, onChangePass] = React.useState('');
     const [first, onChangeFirst] = React.useState('');
     const [last, onChangeLast] = React.useState('');
 
     const onTouch = async(e: {preventDefault: () => void}) => {
-        // e.preventDefault();
-        // const name = username.split("@")[0]
-        // Login.createAccount(name, password, username, first, last, dob, "Default profile")
-        // .then((signUpResult: ISignUpResult) => {
-        //     navigation.navigate('Main');
-        // }).catch(console.error);
+        e.preventDefault();
+        const name = email.split("@")[0]
+        Login.createAccount(name, password, email, first, last, convertDate(date), "Default profile")
+        .then((signUpResult: ISignUpResult) => {
+            if(signUpResult) {
+                navigation.navigate('Login');
+            } else {
+                navigation.navigate('Register');
+            }
+        }).catch(console.error);
     } 
 
     const ref1 = React.useRef();
@@ -41,22 +45,30 @@ export default function RegisterScreen(this: any) {
     }
 
     const onChange = (e, val) => {
-        setDate(val);
-        if(Platform.OS === 'android') {
+        if(val) {
+            setDate(val);
+            setIsPickerShow(false);
+        } else {
+            setDate(new Date(Date.now()))
             setIsPickerShow(false);
         }
+    }
+
+    function convertDate(date: string | number | Date) {
+        function pad(s: string | number) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(date)
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-')
     }
 
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>Register</Text>
             <View style={styles.container2}>
-                <Text style={styles.header}>Username</Text>
+                <Text style={styles.header}>Email</Text>
                 <TextInput
                 style={styles.input}
-                onChangeText={onChangeUsername}
-                value={username}
-                textContentType='username'
+                onChangeText={onChangeEmail}
+                value={email}
                 autoCompleteType='email'
                 keyboardType='email-address'
                 returnKeyType='next'
@@ -102,6 +114,7 @@ export default function RegisterScreen(this: any) {
                 autoFocus={true}
                 />
                 <View style={{flexDirection: 'row'}}>
+                    <View style={{flexDirection:'column'}}>
                     {/* The button that used to trigger the date picker */}
                     {!isPickerShow && (
                         <TouchableOpacity style={styles.btnContainer} onPress={showPicker}>
@@ -119,7 +132,10 @@ export default function RegisterScreen(this: any) {
                         style={styles.datePicker}
                         />
                     )}
-                    <Text style={styles.input2}>{date.toDateString()}</Text>
+                    </View>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.input2}>{convertDate(date)}</Text>
+                    </View>
                 </View>
                 <View style={styles.container3}>
                     <TouchableOpacity onPress={onTouch}>
@@ -145,14 +161,15 @@ const styles = StyleSheet.create({
     },
     input2: {
         marginStart:5,
-        marginTop: 10,
-        padding: 15,
-        paddingHorizontal:30,
+        marginTop: 14,
+        padding:15,
+        paddingHorizontal: 45,
         height: 50,
         backgroundColor: "#fff",
         borderRadius: 20,
         color: '#000',
-        alignSelf:'flex-end'
+        alignSelf:'flex-end',
+        flexWrap: 'wrap'
     },
     title: {
         alignSelf: "center",
@@ -222,3 +239,4 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
     },
 })
+

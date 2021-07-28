@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import moment from 'moment';
 
 const OptionalBody = (props: any) => {
     let body = props.body;
@@ -9,19 +10,26 @@ const OptionalBody = (props: any) => {
         return null;
     }
 }
-
+function convertDate(date: string | number | Date) {
+    function pad(s: string | number) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(date)
+    return [pad(d.getMonth()+1),pad(d.getDate()), d.getFullYear()].join('-')
+}
 const PostSwitch = (props: any) => {
     const type = props.type;
     const item = props.item;
     const body = item.post_text;
     const user = item.username;
+    const date = item.post_date_time;
 
 
     switch (type) {
         case 'post':
             return (
                 <View>
-                    <Text style={props.style}>User: {user} {"\n"}{"\n"}
+                    <Text style={props.style}>
+                    <Text style={styles.user}>{user} {"\n"}</Text>
+                    <Text style={{alignSelf: 'flex-end'}}>{convertDate(date)} {"\n"}{"\n"}</Text>
                     <OptionalBody style={props.style} body={body}/>
                     </Text>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,
@@ -50,5 +58,11 @@ const SinglePost = (props: any) => {
 
     return (<PostSwitch item={item} type={type} style={props.style}/>);
 }
+const styles = StyleSheet.create({
+    user:{
+        fontWeight: 'bold',
+    }
+})
+
 
 export default SinglePost;

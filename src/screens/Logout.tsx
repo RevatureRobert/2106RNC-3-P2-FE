@@ -14,13 +14,12 @@ type LogoutScreenNavigationProp = StackNavigationProp<
 
 export default function LogoutScreen() {
     const navigation = useNavigation<LogoutScreenNavigationProp>();
-    // const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-    //     e.preventDefault();
-    //     LoginCognito.login(username, password, false)
-    //         .then((signUpResult: CognitoUser) => {
-    //             //redirect to home
-    //         }).catch(console.error)
-    // }
+
+    const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+        e.preventDefault();
+        await LoginCognito.logout();
+        navigation.navigate('Landing');
+    }
 
     return (
         <View style={styles.container}>
