@@ -1,15 +1,18 @@
 import { UserAPIType, UserDispatchTypes, USER_FAIL, USER_LOADING, USER_SUCCESS } from "../action-types/UserTypes";
 
-interface DefaultState {
+interface IDefaultState {
     loading: boolean,
     user?: UserAPIType
 }
 
-const defaultState: DefaultState = {
+const defaultState: IDefaultState = {
     loading: false
 }
 
-const userReducer = (state: DefaultState = defaultState, action: UserDispatchTypes): DefaultState => {
+const userReducer = (
+    state: IDefaultState = defaultState, 
+    action: UserDispatchTypes
+    ): IDefaultState => {
     switch (action.type){
         case USER_FAIL:
             return {
