@@ -3,7 +3,9 @@ import { StyleSheet } from 'react-native';
 import { View } from '../components/Themed';
 import PostList from '../components/postFeed/postList';
 
+
 export default function PostFeedScreen() { 
+
   return (
     <View style={styles.container}>
       <PostList />
