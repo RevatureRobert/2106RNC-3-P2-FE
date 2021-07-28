@@ -13,8 +13,8 @@ const OptionalBody = (props: any) => {
 const PostSwitch = (props: any) => {
     const type = props.type;
     const item = props.item;
-    const body = item.body;
-    const user = item.user;
+    const body = item.post_text;
+    const user = item.username;
 
 
     switch (type) {

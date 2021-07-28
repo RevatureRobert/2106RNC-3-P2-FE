@@ -5,18 +5,20 @@ module.exports = {
     collectCoverage: true,
     collectCoverageFrom: [
         "./src/**/*.{ts, tsx}",
-        // "!**/babel.config.js",
-        // "!**/jest.setup.js",
-        // "!**/coverage/**",
-        // "!**/node_modules/**"
+        "!**/babel.config.js",
+        "!**/jest.setup.js",
+        "!**/coverage/**",
+        "!**/node_modules/**"
     ],
     coverageDirectory: 'coverage',
     preset: "jest-expo",
-    roots: ["<rootDir>"],
-    testMatch: [
-      "**/__tests__/**/*.+(ts|tsx|js)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    roots: [
+        "<rootDir>/src"
     ],
+    // testMatch: [
+    //   "**/__tests__/**/*.+(ts|tsx|js)",
+    //   "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    // ],
     transform: {
         "^.+\\.tsx?$": "ts-jest"
     }

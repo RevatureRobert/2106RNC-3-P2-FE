@@ -47,9 +47,9 @@ export const login = (
             const res: CognitoUser = await Auth.signIn(data.username, data.password);
             if (res) {
                 const userInfo: User = {
-                    userName: res.getUsername(),
+                    username: res.getUserName(),
                     password: data.password,
-                };
+                }
                 dispatch({
                     type: SET_USER,
                     payload: userInfo
