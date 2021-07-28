@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import moment from 'moment';
 
 const OptionalBody = (props: any) => {
     let body = props.body;
@@ -15,13 +16,16 @@ const PostSwitch = (props: any) => {
     const item = props.item;
     const body = item.post_text;
     const user = item.username;
+    const date = item.post_date_time;
 
 
     switch (type) {
         case 'post':
             return (
                 <View>
-                    <Text style={props.style}>User: {user} {"\n"}{"\n"}
+                    <Text style={props.style}>
+                    <Text style={styles.user}>{user} {"\n"}</Text>
+                    <Text style={props.style}>{date} {"\n"}{"\n"}</Text>
                     <OptionalBody style={props.style} body={body}/>
                     </Text>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,
@@ -50,5 +54,11 @@ const SinglePost = (props: any) => {
 
     return (<PostSwitch item={item} type={type} style={props.style}/>);
 }
+const styles = StyleSheet.create({
+    user:{
+        fontWeight: 'bold',
+    }
+})
+
 
 export default SinglePost;

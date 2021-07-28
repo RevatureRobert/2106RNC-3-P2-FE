@@ -49,11 +49,11 @@ const PostList = (props: any) => {
 
     const sendPost = async (newPost: string) => {
       try {
-        const x = String(await login.getUserName());
-        console.log(x, newPost);
+        // const x = String(await login.getUserName());
+        // console.log(x, newPost);
         await axios.post("https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost", {
         socialPosts:{
-              userName: x,
+              userName: user,
               postText: newPost,
             },
           }
