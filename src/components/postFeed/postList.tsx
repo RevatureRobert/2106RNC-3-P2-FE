@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Text, View } from '../Themed';
 import PostFlatList from './postFlatlist';
+import login from "../../../LoginCognito";
 
 var axios = require('axios');
 
@@ -48,9 +49,11 @@ const PostList = (props: any) => {
 
     const sendPost = async (newPost: string) => {
       try {
-        await axios.post("http://localhost:3001/api/home/post/addpost", {
+        const x = String(await login.getUserName());
+        console.log(x, newPost);
+        await axios.post("https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost", {
         socialPosts:{
-              userName: user,
+              userName: x,
               postText: newPost,
             },
           }
@@ -65,20 +68,16 @@ const PostList = (props: any) => {
     function handleAdd() {
       // Gets the input from the state hook
       const newPost = post.trim();
-
       // Cleans up the input to prevent double-submission
       if (textInput) {
         textInput.clear();
       }
       setPost('');
       setButtonText('Wave');
-
       if (newPost != '') {
-
         // Use of the spread operator here is NECESSARY for live
         //  re-rendering of the flatlist component
-        // const tempData = [...data];
-
+        const tempData = [...data];
 
         // const postData = {
         //   socialPosts: {
@@ -86,7 +85,6 @@ const PostList = (props: any) => {
         //     userName: user
         //   }
         // };
-
         // var postConfig = {
         //   method: 'post',
         //   url: 'https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost',
@@ -95,7 +93,6 @@ const PostList = (props: any) => {
         // };
 
         sendPost(newPost);
-
         // axios(postConfig)
         //   .then(function (response: any) {
         //     console.log(JSON.stringify(response.data));
