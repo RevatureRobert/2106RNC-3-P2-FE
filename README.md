@@ -15,6 +15,7 @@ Rewrite your Project 1 using the following technologies:
 3. AWS CodePipeline
 4. AWS Amplify/SAM/CFN/Serverless-FW as backend build tool
 5. Expo as React Native build tool
+6. Docker containers
 
 ### Requirements
 
@@ -28,6 +29,8 @@ Rewrite your Project 1 using the following technologies:
 4. 100% Code coverage on Lambda functions.
 5. CI/CD Pipeline implementation using AWS CodePipeline.
 6. Lambda functions deployed as containers.
+
+- [API Documentation](https://documenter.getpostman.com/view/16168422/TzsYM8oz)
 
 ---
 

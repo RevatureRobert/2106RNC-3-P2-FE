@@ -7,13 +7,13 @@ export const SET_SUCCESS = 'set-success';
 export interface User {
     userName: string; // this is their email address
     password: string; // Presumably a hash of their actual password? - B
-    firstName: string;
-    lastName: string;
-    birthDate: string;
-    phoneNumber: string;
-    publicName: string; // this is their public facing names
-    nickName: string;
-    profile: string;
+    firstName?: string;
+    lastName?: string;
+    birthDate?: string;
+    phoneNumber?: string;
+    publicName?: string; // this is their public facing names
+    nickName?: string;
+    profile?: string;
 }
 
 export interface AuthState {
@@ -34,7 +34,6 @@ export interface SignupInfo {
     password: string;
     first_name: string;
     last_name: string;
-    phone: string;
     birthday: string;
 }
 
