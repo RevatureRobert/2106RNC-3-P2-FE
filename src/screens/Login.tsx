@@ -22,7 +22,11 @@ export default function LoginScreen() {
         LoginCognito.login(username, password, false)
             .then((signUpResult: CognitoUser) => {
                 //redirect to home
-                navigation.navigate('Main');
+                if(signUpResult) {
+                    navigation.navigate('Main');
+                } else {
+                    navigation.navigate('Login');
+                }
             }).catch(console.error)
     }
 

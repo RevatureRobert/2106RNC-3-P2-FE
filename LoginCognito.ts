@@ -44,16 +44,14 @@ function createUserAttributeList(
     firstName: string,
     lastName: string,
     birthDate: string,
-    nickName: string,
-    profile: string
+    nickName: string
 ) {
     return [
         newUserAttribute(UserAttributeNames.email, email),
         newUserAttribute(UserAttributeNames.firstName, firstName),
         newUserAttribute(UserAttributeNames.lastName, lastName),
         newUserAttribute(UserAttributeNames.birthDate, birthDate),
-        newUserAttribute(UserAttributeNames.nickName, nickName),
-        newUserAttribute(UserAttributeNames.profile, profile)
+        newUserAttribute(UserAttributeNames.nickName, nickName)
     ];
 }
 
@@ -108,7 +106,6 @@ export default class Login {
         lastName: string,
         birthDate: string,
         nickName: string,
-        profile: string
     ): Promise<ISignUpResult> {
         return new Promise<ISignUpResult>((resolve, reject) => {
             userPool.signUp(
@@ -119,8 +116,7 @@ export default class Login {
                     firstName,
                     lastName,
                     birthDate,
-                    nickName,
-                    profile
+                    nickName
                 ),
                 [],
                 (err, result) => {
