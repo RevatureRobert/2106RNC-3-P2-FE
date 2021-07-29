@@ -19,6 +19,12 @@ phases:
     commands:
       - expo build:android -t apk
 
+artifacts:
+    baseDirectory: android-build
+    files:
+      - '**/*'
+    name: 
+        myname-$(date +%Y-%m-%d)
 cache:
   paths:
     - './node_modules/**/*'
