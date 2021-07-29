@@ -3,6 +3,7 @@ import { TextInput, StyleSheet, TouchableOpacity, ActivityIndicator } from 'reac
 import { Text, View } from '../Themed';
 import PostFlatList from './postFlatlist';
 import login from "../../../LoginCognito";
+import ImageUploadS3 from "./postImageList"
 
 var axios = require('axios');
 
@@ -132,7 +133,7 @@ const PostList = (props: any) => {
           style={styles.input}
           multiline={true}
           numberOfLines={6}
-          placeholder={`Type something in, ${user}!"`}
+          placeholder={`Type something in, ${user}!`}
           onChangeText={(post) => {
             if (post.trim() != '') {
               setButtonText('Post')
@@ -140,7 +141,7 @@ const PostList = (props: any) => {
               setButtonText('Wave')
             }
             setPost(post)
-            }}/>
+            }}/>   
         <TouchableOpacity style={styles.button} onPress={handleAdd}>
           <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>

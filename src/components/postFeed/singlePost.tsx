@@ -28,8 +28,8 @@ const PostSwitch = (props: any) => {
             return (
                 <View>
                     <Text style={props.style}>
-                    <Text style={styles.user}>{user} {"\n"}</Text>
-                    <Text style={{alignSelf: 'flex-end'}}>{convertDate(date)} {"\n"}{"\n"}</Text>
+                    <Text style={styles.user}>{user}  </Text>
+                    <Text style={styles.date}>{convertDate(date)} {"\n"}{"\n"}</Text>
                     <OptionalBody style={props.style} body={body}/>
                     </Text>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,
@@ -59,8 +59,16 @@ const SinglePost = (props: any) => {
     return (<PostSwitch item={item} type={type} style={props.style}/>);
 }
 const styles = StyleSheet.create({
+    normal:{
+
+    },
     user:{
         fontWeight: 'bold',
+    },
+    date:{
+        fontSize: 14,
+        textAlign: 'right',
+        color: `#808080`
     }
 })
 

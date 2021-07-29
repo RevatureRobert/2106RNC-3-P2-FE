@@ -6,8 +6,15 @@ import {
     Platform
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
+import { Storage } from "aws-amplify";
 
-
+export async function s3Upload(file) {
+    const filename = `${Date.now()}-${file.name}`;
+    const stored = await Storage.vault.put(filename, file, {
+      contentType: file.type
+    });
+    return stored.key;
+}
 export default function imagePicker() {
     const [image, setImage] = useState('');
   
@@ -36,7 +43,7 @@ export default function imagePicker() {
         setImage(result.uri);
       }
     };
-  
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
