@@ -17,7 +17,7 @@ phases:
 
   build:
     commands:
-      - npm run eject
+      - npm run expo build:android -t apk
 
 cache:
   paths:
