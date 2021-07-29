@@ -22,13 +22,6 @@ export default function ProfileScreen(props: any) {
       Profile: "",
   });
 
-  const fetchUserData = (text: any, content: any) => {
-    //get the current user
-    Auth.currentCredentials();
-    return
-
-  }
-
   const submitHandle = (e: GestureResponderEvent) => {
     e.preventDefault();
     toggleEditing(() => {return !editable});
@@ -75,7 +68,7 @@ export default function ProfileScreen(props: any) {
               color: '#000',
             }}  
             editable={false}
-            >{userData.email}</TextInput>
+            ></TextInput>
           </View>
 
           <View style={{flexDirection:'row'}}>
