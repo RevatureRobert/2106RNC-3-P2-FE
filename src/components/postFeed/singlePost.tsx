@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import moment from 'moment';
+import Buttons from './Buttons';
 
 const OptionalBody = (props: any) => {
     let body = props.body;
@@ -10,30 +10,32 @@ const OptionalBody = (props: any) => {
         return null;
     }
 }
-function convertDate(date: string | number | Date) {
-    function pad(s: string | number) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(date)
-    return [pad(d.getMonth()+1),pad(d.getDate()), d.getFullYear()].join('-')
-}
+
 const PostSwitch = (props: any) => {
     const type = props.type;
     const item = props.item;
     const body = item.post_text;
     const user = item.username;
-    const date = item.post_date_time;
+    const date = new Date(item.post_date_time);
 
 
     switch (type) {
         case 'post':
             return (
-                <View>
-                    <Text style={props.style}>
-                    <Text style={styles.user}>{user} {"\n"}</Text>
-                    <Text style={{alignSelf: 'flex-end'}}>{convertDate(date)} {"\n"}{"\n"}</Text>
-                    <OptionalBody style={props.style} body={body}/>
-                    </Text>
+                <View style={styles.container}>
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={styles.user}>{user}</Text>
+                            <Text style={styles.date}>{date.toLocaleString()}</Text>
+                        </View>
+                        <View style={{flexDirection:'row'}}>
+                            <OptionalBody style={styles.body} body={body} numberOfLines={5}/>
+                        </View>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,
                          this time of type="comment" and data=[the relevant comments] */}
+
+                         <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
+                             <Buttons />
+                         </View>
                 </View>
             );
         case 'comment':
@@ -59,8 +61,32 @@ const SinglePost = (props: any) => {
     return (<PostSwitch item={item} type={type} style={props.style}/>);
 }
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 20,
+        margin: 5,
+        maxHeight: 1000
+    },
     user:{
         fontWeight: 'bold',
+        alignSelf: 'flex-start',
+        fontSize:18,
+        textAlign: 'left'
+    },
+    body: {
+        width: 0,
+        flexGrow: 1,
+        flex: 1,
+        fontSize: 18,
+        paddingHorizontal: 10
+    },
+    date: {
+        flexGrow: 1,
+        flex: 1,
+        alignSelf: 'flex-end',
+        paddingLeft: 10,
+        textAlign:'right'
     }
 })
 
