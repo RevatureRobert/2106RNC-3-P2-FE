@@ -24,6 +24,7 @@ const PostList = (props: any) => {
         {post_id: 'TESTIN', username: 'Jackson'},
       ]
 
+
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(DEFAULT);
     const user = props.user || 'DefaultUser@email.com';
