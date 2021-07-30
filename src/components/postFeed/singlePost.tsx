@@ -25,10 +25,10 @@ const PostSwitch = (props: any) => {
                 <View style={styles.container}>
                         <View style={{flexDirection:'row'}}>
                             <Text style={styles.user}>{user}</Text>
-                            <Text style={styles.date}>{date.toLocaleString()}</Text>
+                            <Text style={styles.date}>{date.toDateString()}</Text>
                         </View>
                         <View style={{flexDirection:'row'}}>
-                            <OptionalBody style={styles.body} body={body} numberOfLines={5}/>
+                            <OptionalBody style={styles.body} body={body} />
                         </View>
                     {/* If going off my recommendations, herein would have to be another PostFlatList,
                          this time of type="comment" and data=[the relevant comments] */}
@@ -64,20 +64,21 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         borderRadius: 10,
-        padding: 20,
+        padding: 10,
         margin: 5,
-        maxHeight: 1000
+        flex: 1,
+        flexGrow: 1
     },
     user:{
         fontWeight: 'bold',
         alignSelf: 'flex-start',
         fontSize:18,
-        textAlign: 'left'
+        textAlign: 'left',
     },
     body: {
         width: 0,
-        flexGrow: 1,
         flex: 1,
+        flexGrow:1,
         fontSize: 18,
         paddingHorizontal: 10
     },

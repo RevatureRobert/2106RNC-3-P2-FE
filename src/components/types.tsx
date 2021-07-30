@@ -8,6 +8,7 @@
     Login: undefined;
     Register: undefined;
     Main: undefined;
+    NotFound: undefined;
   };
 
   export type BottomTabParamList = {

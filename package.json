@@ -1,12 +1,14 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo-cli start",
+    "start": "expo start",
     "test": "jest",
     "android": "expo-cli start --android",
     "ios": "expo-cli start --ios",
     "web": "expo-cli start --web",
     "eject": "expo eject",
+    "build:android": "expo build:android -t apk --nowait",
+    "aghh": "expo export --dev --public-url ",
+    "build:ios": "expo build:ios",
     "checker": "bash ./packageChecker.sh"
   },
   "jest": {
@@ -37,7 +39,7 @@
     "moment": "^2.29.1",
     "react": "16.13.1",
     "react-dom": "^17.0.2",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native": "~0.63.4",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
@@ -47,7 +49,10 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "ts-jest": "^27.0.4",
-    "ts-node": "^10.1.0"
+    "ts-node": "^10.1.0",
+    "expo-updates": "~0.8.1",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-unimodules": "~0.14.5"
   },
   "devDependencies": {
     "@types/react": "~16.9.35",
@@ -56,7 +61,10 @@
     "jest": "^27.0.6",
     "jest-config": "^27.0.6",
     "jest-expo": "^42.0.0",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "@babel/core": "^7.9.0"
   },
-  "private": true
+  "private": true,
+  "name": "2106RNC-3-P2-FE",
+  "version": "1.0.0"
 }

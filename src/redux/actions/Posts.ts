@@ -7,7 +7,7 @@ export const GetAllPosts = () => async (dispatch: Dispatch<PostsDispatchTypes>) 
         dispatch({
             type: POSTS_LOADING
         })
-        const res = await axios.get('/posts')
+        const res = await axios.get('https://thesocialjusticewarriors.com/api/home/post/getall')
         dispatch({
             type: POSTS_SUCCESS,
             payload: res.data
@@ -20,12 +20,12 @@ export const GetAllPosts = () => async (dispatch: Dispatch<PostsDispatchTypes>) 
 }
 
 
-export const GetPost = (postId: string) => async(dispatch: Dispatch<PostsDispatchTypes>) => {
+export const GetComments = (parentPostId: string) => async(dispatch: Dispatch<PostsDispatchTypes>) => {
     try {
         dispatch({
             type: POSTS_LOADING
         })
-        const res = await axios.get(`/posts/${postId}`);
+        const res = await axios.get(`/post/getcomments/${parentPostId}`);
         dispatch({
             type: POSTS_SUCCESS,
             payload: res.data
@@ -55,38 +55,18 @@ export const GetUserPosts = () => async(dispatch: Dispatch<PostsDispatchTypes>) 
     }
 }
 
-export const AddPost = (post: {}) => async(dispatch: Dispatch<PostsDispatchTypes>) => {
+export const AddPost = (post: {}) => {
     try{
-        dispatch({
-            type: POSTS_LOADING
-        })
-        await axios.post('/posts', post).then(function (res) {
-                    dispatch({
-                        type: POSTS_SUCCESS,
-                        payload: res.data
-                    })
-                })
+        await axios.post('/addpost', post).catch((error) => console.log(error));
     } catch (err) {
-        dispatch({
-            type: POSTS_FAIL
-        })
+        return 'Error in posting: ' + err;
     }
 }
 
-export const DeletePost = (postId: string) => async(dispatch: Dispatch<PostsDispatchTypes>) => {
+export const DeletePost = (postId: string) => {
     try {
-        dispatch({
-            type: POSTS_LOADING
-        })
-        await axios.delete(`/posts/${postId}`).then(function (res) {
-            dispatch({
-                type: POSTS_SUCCESS,
-                payload: res.data
-            })
-        })
+        await axios.delete(`/post/delete/${postId}`);
     } catch (err) {
-        dispatch({
-            type: POSTS_FAIL
-        })
+        return 'Error in deleting: ' + err;
     }
 }
