@@ -9,15 +9,15 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
-      - npm install -g jest
+      - npm install -g expo-cli
 
   pre_build:
     commands:
-      - npm install
+      - npm install --force
 
   build:
     commands:
-      - npm run eject
+      - expo build:ios
 
 cache:
   paths:
