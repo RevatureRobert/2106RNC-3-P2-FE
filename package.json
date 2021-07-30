@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start",
     "test": "jest",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "expo-cli start --android",
+    "ios": "expo-cli start --ios",
     "web": "expo-cli start --web",
     "eject": "expo eject",
     "build:android": "expo build:android -t apk --nowait",
