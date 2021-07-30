@@ -11,18 +11,21 @@ ARG PORT=19006
 ENV PORT $PORT
 EXPOSE $PORT 19001 19002
 
-RUN apk update
-
 # install global packages
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH /home/node/.npm-global/bin:$PATH
 RUN npm i --unsafe-perm -g npm@latest expo-cli@latest
+
 
 # install dependencies first
 RUN mkdir /app
 WORKDIR /app
 COPY . /app
 RUN npm install --force
+RUN npx expo login --non-interactive -u "mat2718" -p "Pandas12"
+RUN expo publish
+RUN expo build:web
+RUN expo build:android -t apk --no-wait
 
 # ENTRYPOINT ["node"]
 ENTRYPOINT ["npm", "run"]
