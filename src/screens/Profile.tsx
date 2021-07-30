@@ -103,7 +103,7 @@ export default function ProfileScreen() {
             <TextInput 
             style={styles.input}
             value={userData.LastName} 
-            placeholder='Last Name' 
+            placeholder={userData.LastName} 
             editable={editable} 
             onChange={(e) => manageEdits('LastName', e)}
             ref={ref1}
@@ -118,7 +118,7 @@ export default function ProfileScreen() {
             <TextInput 
             style={styles.input}
             value={userData.BirthDate} 
-            placeholder='MM/DD/YYYY' 
+            placeholder={userData.BirthDate}
             editable={editable} 
             onChange={(e) => manageEdits('BirthDate', e)}
             ref={ref2}
@@ -133,7 +133,7 @@ export default function ProfileScreen() {
             <TextInput 
             style={styles.input}
             value={userData.PhoneNumber} 
-            placeholder='Phone number' 
+            placeholder={userData.PhoneNumber} 
             editable={editable} 
             onChange={(e) => manageEdits('PhoneNumber', e)}
             ref={ref3}
@@ -148,7 +148,7 @@ export default function ProfileScreen() {
             <TextInput 
             style={styles.input}
             value={userData.NickName} 
-            placeholder='Nickname' 
+            placeholder={userData.NickName} 
             editable={editable} 
             onChange={(e) => manageEdits('NickName', e)}
             ref={ref4}
@@ -163,7 +163,7 @@ export default function ProfileScreen() {
             <TextInput 
             style={styles.input}
             value={userData.PreferredName} 
-            placeholder='Preferred Name' 
+            placeholder={userData.PreferredName}
             editable={editable} 
             onChange={(e) => manageEdits('PreferredName', e)} 
             ref={ref5}
@@ -180,7 +180,7 @@ export default function ProfileScreen() {
               multiline={true} 
               numberOfLines={3} 
               value={userData.Profile} 
-              placeholder='Write something about you!' 
+              placeholder={userData.Profile} 
               editable={editable} 
               onChange={(e) => manageEdits('Profile', e)}
               ref={ref6}
