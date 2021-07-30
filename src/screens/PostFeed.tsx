@@ -15,7 +15,7 @@ export default function PostFeedScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -130,7 +130,7 @@ const PostList = (props: any) => {
   
     }
     return (
-      <View style={styles.container}>
+      <View>
         <TextInput
           // Adding ref here allows us to clear the input upon submission
           ref={input => {textInput = input}}
@@ -176,11 +176,6 @@ const styles = StyleSheet.create({
       height:100,
       margin:10,
       marginTop:20
-  },
-  container: {
-      flex: 1,
-      alignItems: "center",
-      padding: 20
   },
   container2: {
       flexDirection: "row",
