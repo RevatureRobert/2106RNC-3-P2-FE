@@ -7,6 +7,8 @@
     "ios": "expo-cli start --ios",
     "web": "expo-cli start --web",
     "eject": "expo eject",
+    "build:android": "expo build:android -t apk",
+    "build:ios": "expo build:ios",
     "checker": "bash ./packageChecker.sh"
   },
   "jest": {
