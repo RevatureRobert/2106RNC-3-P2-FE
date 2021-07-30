@@ -18,7 +18,7 @@ phases:
       - echo Compiling the actual code
       # - expo publish
       - expo build:web
-      - expo build:android -t apk --no-wait
+      - expo build:android -t apk --nowait
   post_build:
     commands:
       - echo Build completed on `date`
