@@ -18,13 +18,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mat2718.SocialJusticeWarriors"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/logo_name.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.mat2718.SocialJusticeWarriors"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
