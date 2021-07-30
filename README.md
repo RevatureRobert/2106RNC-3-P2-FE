@@ -36,7 +36,7 @@ Rewrite your Project 1 using the following technologies:
 
 **Front end**
 
-1. Application must be able to be fully built and deployable for both Android and IOS. Presentation should be done with everyone, including audience, installing the app on their devices to follow along.
+1. Application must be able to be fully built and deployable for both Android and IOS. Presentation should be done with everyone, including audience, installing the app on their devices to follow along. 
 2. Presentation may be done with an emulator to provide a standard viewing of the application.
 3. Code coverage should be at 30% for React Native application, testing should be provided for both Android and IOS devices.
 4. CI/CD Pipeline for automated testing and packaging [deployed package can either be to s3 bucket for download/install or to app store (This can be done for Android with owners granting permissions on their device, IOS may differ here)]
