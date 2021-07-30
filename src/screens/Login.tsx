@@ -1,11 +1,14 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { StyleSheet, TextInput, Image, TouchableOpacity, ScrollView, GestureResponderEvent } from 'react-native';
 import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { AuthStackParamList } from '../components/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore } from '../redux/store';
+import { login, setError } from '../redux/actions/Authentication';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     AuthStackParamList,
@@ -17,21 +20,34 @@ export default function LoginScreen() {
     const [username, onChangeUsername] = useState('');
     const [password, onChangePass] = useState('');
 
-    const onTouch = async(e: { preventDefault: () => void }) => {
+    const { error } = useSelector((state: RootStore) => state.auth);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => {
+            if (error) {
+                dispatch(setError(''));
+            }
+            onChangeUsername('');
+            onChangePass('');
+        }
+    }, [error, dispatch]);
+
+    const onTouch = async(e: GestureResponderEvent) => {
         e.preventDefault();
-        LoginCognito.login(username, password, false)
-            .then((signUpResult: CognitoUser) => {
-                //redirect to home
-                if(signUpResult) {
-                    navigation.navigate('Main');
-                } else {
-                    navigation.navigate('Login');
-                }
-            }).catch(console.error)
+        dispatch(login({ username, password }));
+        // LoginCognito.login(username, password, false)
+        //     .then((signUpResult: CognitoUser) => {
+        //         if(signUpResult) {
+        //             navigation.navigate('Main');     
+        //         } else {
+        //             navigation.navigate('Login');
+        //         }
+        //     }).catch(console.error)
     }
 
     const ref1 = useRef();
-
+    
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.header}>Sign in to your account</Text>

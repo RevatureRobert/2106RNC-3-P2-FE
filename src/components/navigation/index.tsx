@@ -7,53 +7,45 @@
  import { createStackNavigator } from '@react-navigation/stack';
  import * as React from 'react';
  import { ColorSchemeName, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../redux/store';
  import LandingScreen from '../../screens/Landing';
  import LoginScreen from '../../screens/Login';
  import NotFoundScreen from '../../screens/NotFoundScreen';
  import RegisterScreen from '../../screens/Register';
- import { LoginParamList, RegisterParamList } from '../types';
+ import { AuthStackParamList, LoginParamList, RegisterParamList } from '../types';
  import BottomTabNavigator from './BottomTabNavigation';
  import LinkingConfiguration from './LinkingConfiguration';
  
- const Stack = createStackNavigator();
+
 
  export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-
-  const isUserSignedIn = () => false;
-
-  if(isUserSignedIn()) {
-    return (
-      <NavigationContainer
-      linking={LinkingConfiguration}
-      fallback={<Text>Loading...</Text>}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-     <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Main" component={BottomTabNavigator} />
-        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-        <Stack.Screen name="Landing" component={LandingScreen} />
-        <Stack.Screen name="Login" component={LoginNavigator} />
-        <Stack.Screen name="Register" component={RegisterNavigator} />
-     </Stack.Navigator>
-    </NavigationContainer>
-    )
-  } else {
-      return (
+  const Stack = createStackNavigator<AuthStackParamList>();
+  const user = useSelector((state: RootStore) => state.auth);
+  
+  return (
      <NavigationContainer
        linking={LinkingConfiguration}
        fallback={<Text>Loading...</Text>}
        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Landing" component={LandingScreen} />
-        <Stack.Screen name="Login" component={LoginNavigator} />
-        <Stack.Screen name="Register" component={RegisterNavigator} />
-        <Stack.Screen name="Main" component={BottomTabNavigator} />
-        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+        {
+          user.authenticated === true ? (
+            <Stack.Screen name="Main" component={BottomTabNavigator} />
+          ) : (
+            <>
+            <Stack.Screen name="Landing" component={LandingScreen} />
+            <Stack.Screen name="Login" component={LoginNavigator} />
+            <Stack.Screen name="Register" component={RegisterNavigator} />
+            
+            </>
+          )
+        }
       </Stack.Navigator>
      </NavigationContainer>
    );
   }
 
- }
  
  // A root stack navigator is often used for displaying modals on top of all other content
  // Read more here: https://reactnavigation.org/docs/modal
@@ -116,3 +108,11 @@ function RegisterNavigator() {
     </RegisterStack.Navigator>
   );
 }
+
+/**
+ *      <Stack.Screen name="Landing" component={LandingScreen} />
+        <Stack.Screen name="Login" component={LoginNavigator} />
+        <Stack.Screen name="Register" component={RegisterNavigator} />
+        <Stack.Screen name="Main" component={BottomTabNavigator} />
+        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+ */

@@ -3,6 +3,9 @@ import { TextInput, StyleSheet, TouchableOpacity, ActivityIndicator } from 'reac
 import { Text, View } from '../Themed';
 import PostFlatList from './postFlatlist';
 import login from "../../../LoginCognito";
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../redux/store';
+import { Auth } from 'aws-amplify';
 
 var axios = require('axios');
 
@@ -24,9 +27,11 @@ const PostList = (props: any) => {
         {post_id: 'TESTIN', username: 'Jackson'},
       ]
 
+    const currentUser = useSelector((state: RootStore) => state.auth.user);
+    console.log(currentUser);
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(DEFAULT);
-    const user = props.user || 'DefaultUser@email.com';
+    const [user, setUser] = useState(currentUser?.userName);
     const [post, setPost] = useState('');
     const [buttonText, setButtonText] = useState('Wave')
     let textInput: TextInput | null;
@@ -50,11 +55,11 @@ const PostList = (props: any) => {
     
     const sendPost = async (newPost: string) => {
       try {
-        const x = String(await login.getUserName());
+        // const x = String(await login.getUserName());
         // console.log(x, newPost);
         await axios.post("https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost", {
         socialPosts:{
-              userName: x,
+              userName: user,
               postText: newPost,
             },
           }
