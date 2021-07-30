@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     fontSize: 18,
-    // height: 50, // i commented out the height because the container wasnt growing even if the text did
     backgroundColor: "#fff",
     borderRadius:10,
   },
@@ -34,6 +33,7 @@ const PostFlatList = (props: any) => {
             style={styles.item}
           />
         }
+        
         // the first "item" initializes a variable representing every item;
         //  the next determines what the key is.
         keyExtractor={item => item.post_id}

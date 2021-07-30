@@ -25,7 +25,7 @@ const PostSwitch = (props: any) => {
                 <View style={styles.container}>
                         <View style={{flexDirection:'row'}}>
                             <Text style={styles.user}>{user}</Text>
-                            <Text style={styles.date}>{date.toLocaleString()}</Text>
+                            <Text style={styles.date}>{date.toDateString()}</Text>
                         </View>
                         <View style={{flexDirection:'row'}}>
                             <OptionalBody style={styles.body} body={body} numberOfLines={5}/>
@@ -65,8 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 20,
-        margin: 5,
-        maxHeight: 1000
+        margin: 5
     },
     user:{
         fontWeight: 'bold',

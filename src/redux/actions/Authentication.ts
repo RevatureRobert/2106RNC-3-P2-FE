@@ -3,6 +3,7 @@ import { RootStore } from '../store';
 import { AuthAction, LoginInfo, SET_USER, User, SignupInfo, SET_ERROR, SIGN_OUT, SET_SUCCESS, SET_LOADING } from '../action-types/UserActionTypes';
 import { Auth } from 'aws-amplify';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import LoginCognito from '../../../LoginCognito';
 
 export const setError = (
     msg: string
@@ -40,14 +41,13 @@ export const setLoading = (
 // user login
 export const login = (
     data: LoginInfo,
-    onError: () => void
 ) : ThunkAction<void, RootStore, null, AuthAction> => {
     return async (dispatch) => {
         try {
             const res: CognitoUser = await Auth.signIn(data.username, data.password);
             if (res) {
                 const userInfo: User = {
-                    username: res.getUserName(),
+                    userName: res.getUsername(),
                     password: data.password,
                 }
                 dispatch({
@@ -56,7 +56,6 @@ export const login = (
                 })
             }
         } catch (err) {
-            onError();
             dispatch(setError(err.message));
             console.log(err);
         }
@@ -73,9 +72,9 @@ export const signup = (
             const res = await Auth.signUp(
                 data.username,
                 data.password,
-                data.first_name,
-                data.last_name,
-                data.birthday
+                data.attributes?.first_name as string,
+                data.attributes?.last_name as string,
+                data.attributes?.birthday as string
                 );
             console.log(res.user);
         } catch (err) {
