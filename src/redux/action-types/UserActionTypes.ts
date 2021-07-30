@@ -32,9 +32,11 @@ export interface LoginInfo {
 export interface SignupInfo {
     username: string;
     password: string;
-    first_name: string;
-    last_name: string;
-    birthday: string;
+    attributes?: {
+        first_name?: string;
+        last_name?: string;
+        birthday?: string;
+    }
 }
 
 export interface SetUserAction {

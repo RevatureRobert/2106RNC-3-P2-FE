@@ -2,25 +2,28 @@ import { Auth } from 'aws-amplify';
 import React, { useRef, useState } from 'react';
 import { GestureResponderEvent, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginCognito from '../../LoginCognito';
+import login from '../../LoginCognito';
 import { RootStore } from '../redux/store';
 
 
 // The data object should have each of the below 8 attributes
-export default function ProfileScreen(props: any) {
+export default function ProfileScreen() {
   const currentUser = useSelector((state: RootStore) => state.auth.user);
+  console.log(currentUser);
+
   const [editable, toggleEditing] = useState(false);
   const [buttonText, setButtonText] = useState("Edit");
-  const [userData, setUserData] = useState(props.data || {
-      Email: currentUser,
-      FirstName: "",
-      LastName: "",
-      BirthDate: "",
-      PhoneNumber: "",
-      NickName: "",
-      PreferredName: "",
-      Profile: "",
+  const [userData, setUserData] = useState({
+      Email: currentUser?.userName,
+      FirstName: currentUser?.firstName,
+      LastName: currentUser?.lastName,
+      BirthDate: currentUser?.birthDate,
+      PhoneNumber: currentUser?.phoneNumber,
+      NickName: currentUser?.nickName,
+      PreferredName: currentUser?.publicName,
+      Profile: currentUser?.profile,
   });
+
 
   const submitHandle = (e: GestureResponderEvent) => {
     e.preventDefault();
@@ -30,6 +33,15 @@ export default function ProfileScreen(props: any) {
     } else {
       setButtonText("Edit");
       // Here's where you can properly save edited data
+      Auth.currentCredentials();
+      Auth.updateUserAttributes(currentUser, {
+        'firstName': userData.FirstName,
+        'lastName': userData.LastName,
+        'birthDate': userData.BirthDate,
+        'nickName': userData.NickName,
+        'publicName': userData.PreferredName,
+        'profile': userData.Profile
+      });
       console.log(userData);
     }
   }
@@ -66,9 +78,10 @@ export default function ProfileScreen(props: any) {
               backgroundColor: "#9fc2cc",
               borderRadius: 20,
               color: '#000',
+              paddingHorizontal:15
             }}  
             editable={false}
-            ></TextInput>
+            >{userData.Email}</TextInput>
           </View>
 
           <View style={{flexDirection:'row'}}>
@@ -76,7 +89,7 @@ export default function ProfileScreen(props: any) {
             <TextInput 
             style={styles.input}
             value={userData.FirstName} 
-            placeholder='First Name' 
+            placeholder={userData.FirstName}
             editable={editable} 
             onChange={(e) => manageEdits('FirstName', e)}
             autoFocus={true}
@@ -90,7 +103,7 @@ export default function ProfileScreen(props: any) {
             <TextInput 
             style={styles.input}
             value={userData.LastName} 
-            placeholder='Last Name' 
+            placeholder={userData.LastName} 
             editable={editable} 
             onChange={(e) => manageEdits('LastName', e)}
             ref={ref1}
@@ -105,7 +118,7 @@ export default function ProfileScreen(props: any) {
             <TextInput 
             style={styles.input}
             value={userData.BirthDate} 
-            placeholder='MM/DD/YYYY' 
+            placeholder={userData.BirthDate}
             editable={editable} 
             onChange={(e) => manageEdits('BirthDate', e)}
             ref={ref2}
@@ -120,7 +133,7 @@ export default function ProfileScreen(props: any) {
             <TextInput 
             style={styles.input}
             value={userData.PhoneNumber} 
-            placeholder='Phone number' 
+            placeholder={userData.PhoneNumber} 
             editable={editable} 
             onChange={(e) => manageEdits('PhoneNumber', e)}
             ref={ref3}
@@ -135,7 +148,7 @@ export default function ProfileScreen(props: any) {
             <TextInput 
             style={styles.input}
             value={userData.NickName} 
-            placeholder='Nickname' 
+            placeholder={userData.NickName} 
             editable={editable} 
             onChange={(e) => manageEdits('NickName', e)}
             ref={ref4}
@@ -150,7 +163,7 @@ export default function ProfileScreen(props: any) {
             <TextInput 
             style={styles.input}
             value={userData.PreferredName} 
-            placeholder='Preferred Name' 
+            placeholder={userData.PreferredName}
             editable={editable} 
             onChange={(e) => manageEdits('PreferredName', e)} 
             ref={ref5}
@@ -167,7 +180,7 @@ export default function ProfileScreen(props: any) {
               multiline={true} 
               numberOfLines={3} 
               value={userData.Profile} 
-              placeholder='Write something about you!' 
+              placeholder={userData.Profile} 
               editable={editable} 
               onChange={(e) => manageEdits('Profile', e)}
               ref={ref6}
@@ -188,7 +201,7 @@ export default function ProfileScreen(props: any) {
   const styles = StyleSheet.create({
       input: {
         flex: 1,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         height: 50,
         borderWidth:2,
         backgroundColor: "#fff",

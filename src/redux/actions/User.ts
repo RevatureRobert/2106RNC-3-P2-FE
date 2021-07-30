@@ -26,7 +26,7 @@ export const PostUser = (params: UserAPIType) => async(dispatch: Dispatch<UserDi
             type: USER_LOADING
         })
         const body = {nickName: params.nickName};
-        await axios.put(`/update/${params.username}/nickName`, body)
+        await axios.put(`/update`, body)
             .then((res) => {
                 dispatch({
                     type: USER_SUCCESS,
