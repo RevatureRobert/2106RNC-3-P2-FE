@@ -7,7 +7,7 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm install --global --unsafe-perm sharp-cli expo-cli
-      - npm install --legacy-peer-deps
+      - npm install --force
   pre_build:
     commands:
       # - export EXPO_CLI_PASSWORD=$(aws ssm get-parameter --name "expo-cli-password" --region "us-east-1" --query 'Parameter.Value' --with-decryption --output text)
@@ -16,7 +16,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Compiling the actual code
-      - expo publish
+      # - expo publish
       - expo build:web
       - expo build:android -t apk --no-wait
   post_build:
