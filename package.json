@@ -6,7 +6,7 @@
     "ios": "expo-cli start --ios",
     "web": "expo-cli start --web",
     "eject": "expo eject",
-    "build:android": "expo build:android -t apk --nowait",
+    "build:android": "expo build:android -t apk",
     "aghh": "expo export --dev --public-url ",
     "build:ios": "expo build:ios",
     "checker": "bash ./packageChecker.sh"
