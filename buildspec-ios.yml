@@ -17,7 +17,7 @@ phases:
 
   build:
     commands:
-      - expo build:ios
+      - eas build
 
 cache:
   paths:
