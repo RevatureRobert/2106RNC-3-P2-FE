@@ -64,8 +64,7 @@ export const login = (
 
 // user sign up
 export const signup = (
-    data: SignupInfo,
-    onError: () => void
+    data: SignupInfo
 ) => {
     return async () => {
         try {
@@ -78,7 +77,7 @@ export const signup = (
                 );
             console.log(res.user);
         } catch (err) {
-            onError();
+            setError('');
         }
     }
 }

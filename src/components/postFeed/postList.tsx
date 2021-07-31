@@ -28,7 +28,7 @@ const PostList = (props: any) => {
       ]
 
     const currentUser = useSelector((state: RootStore) => state.auth.user);
-    console.log(currentUser);
+
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(DEFAULT);
     const [user, setUser] = useState(currentUser?.userName);
@@ -43,7 +43,7 @@ const PostList = (props: any) => {
         .then(function (response: any) {
           const resString = JSON.stringify(response.data.posts.Items);
           getData = JSON.parse(resString);
-          console.log(getData);
+          //console.log(getData);
           setLoading(false);
           setData(getData);
         })
@@ -137,7 +137,7 @@ const PostList = (props: any) => {
           style={styles.input}
           multiline={true}
           numberOfLines={6}
-          placeholder={`Type something in, ${user}!"`}
+          placeholder={`Type something in, ${user}!`}
           onChangeText={(post) => {
             if (post.trim() != '') {
               setButtonText('Post')
