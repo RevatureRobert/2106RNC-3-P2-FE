@@ -9,7 +9,12 @@ export interface UserAPI {
 
 export type UserAPIType = {
     username: string;
-    nickName: string;
+    firstName: string;
+    lastName: string;
+    birthday: string;
+    phone: string;
+    preferred: string;
+    profile: string;
 
 }
 
