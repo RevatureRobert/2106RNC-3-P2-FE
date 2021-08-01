@@ -61,13 +61,13 @@ export default function ProfileScreen() {
     profile: string
   ) => {
     try {
-     await axios.post('https://thesocialjusticewarriors.com/api/home/add', {
+     await axios.put('https://thesocialjusticewarriors.com/api/home/update', {
       user: {
         userName: username,
-        firstName: first,
-        lastName: last,
-        phoneNumber: phone,
-        publicName: preferred,
+        first_name: first,
+        last_name: last,
+        phone_number: phone,
+        public_name: preferred,
         birthday: birthday,
         profile: profile
       }
@@ -136,56 +136,52 @@ export default function ProfileScreen() {
             style={styles.input} 
             editable={editable} 
             value={newFirst}
-            placeholder={first}
             onChangeText={(e:string) => setNewFirst(e)}
             autoFocus={true}
             onSubmitEditing={() => ref1.current.focus()}
-            returnKeyType='next'/>
+            returnKeyType='next'>{newFirst}</TextInput>
           </View>
 
           <View style={{flexDirection:'row'}}>
             <Text style={styles.header}>Last Name</Text>
             <TextInput 
             style={styles.input}
-            value={newLast}
-            placeholder={last} 
+            value={newLast} 
             editable={editable} 
             onChangeText={(e: string) => setNewLast(e)}
             ref={ref1}
             autoFocus={true}
             onSubmitEditing={() => ref2.current.focus()}
             returnKeyType='next' 
-            />
+            >{newLast}</TextInput>
           </View>  
         
           <View style={{flexDirection:'row'}}>
             <Text style={styles.header}>Birthday</Text>
             <TextInput 
             style={styles.input}
-            value={newBirthday}
-            placeholder={birthday} 
+            value={newBirthday} 
             editable={editable} 
             onChangeText={(e: string) => setNewBirthday(e)}
             ref={ref2}
             autoFocus={true}
             onSubmitEditing={() => ref3.current.focus()} 
             returnKeyType='next' 
-            />
+            >{newBirthday}</TextInput>
           </View>
 
           <View style={{flexDirection:'row'}}>
             <Text style={styles.header}>Phone Number</Text>
             <TextInput 
             style={styles.input}
-            value={newPhone}
-            placeholder={phone} 
+            value={newPhone} 
             editable={editable} 
             onChangeText={(e:string) => setNewPhone(e)}
             ref={ref3}
             autoFocus={true}
             onSubmitEditing={() => ref4.current.focus()}
             returnKeyType='next'    
-            />
+            >{newPhone}</TextInput>
           </View>
 
           <View style={{flexDirection:'row'}}>
@@ -200,7 +196,7 @@ export default function ProfileScreen() {
             autoFocus={true}
             onSubmitEditing={() => ref5.current.focus()}
             returnKeyType='next' 
-            />
+            >{newPreferred}</TextInput>
           </View>
 
             <View style={{flexDirection:'row'}}>
@@ -210,13 +206,12 @@ export default function ProfileScreen() {
               multiline={true} 
               numberOfLines={3} 
               value={newProfile} 
-              editable={editable}
-              placeholder={profile} 
+              editable={editable} 
               onChangeText={(e:string) => setNewProfile(e)}
               ref={ref5}
               autoFocus={true}
               returnKeyType='done'
-              />
+              >{newProfile}</TextInput>
             </View>
         </View>
         <View style={styles.container3}>
