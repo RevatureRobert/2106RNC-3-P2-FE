@@ -84,36 +84,7 @@ const PostList = (props: any) => {
         //  re-rendering of the flatlist component
         const tempData = [...data];
 
-        // const postData = {
-        //   socialPosts: {
-        //     postText: newPost,
-        //     userName: user
-        //   }
-        // };
-        // var postConfig = {
-        //   method: 'post',
-        //   url: 'https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost',
-        //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        //   data : postData
-        // };
-
         sendPost(newPost);
-        // axios(postConfig)
-        //   .then(function (response: any) {
-        //     console.log(JSON.stringify(response.data));
-        //     setLoading(true);
-        //   })
-        //   .catch(function (error: any) {
-        //     console.log(error);
-        //   });
-        
-        /*Deprecated* - used when post data was hardcoded, for testing purposes*/
-        // Herein is the data saved for a visible update
-        // tempData.unshift({postId: 'NEW MESSAGE ID', user: user, body: newPost});
-
-        // Save function here or below
-        // setData(tempData);
-        // *Deprecated*/
       }
     }
 
