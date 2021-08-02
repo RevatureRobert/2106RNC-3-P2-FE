@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, ScrollView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { Platform, ScrollView, StyleSheet, TextInput, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { AuthStackParamList } from '../components/types';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -7,30 +7,68 @@ import { useNavigation } from '@react-navigation/native';
 import Login from '../../LoginCognito';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore } from '../redux/store';
+import { setError, signup } from '../redux/actions/Authentication';
+import { User } from '../redux/action-types/UserActionTypes';
+import axios from 'axios';
 
 type RegisterScreenNavigationProp = StackNavigationProp<
     AuthStackParamList,
     'Register'
 >
 
-export default function RegisterScreen(this: any) {
+export default function RegisterScreen() {
     const navigation = useNavigation<RegisterScreenNavigationProp>();
-    const [email, onChangeEmail] = React.useState('');
+    const [username, onChangeUsername] = React.useState('');
     const [password, onChangePass] = React.useState('');
-    const [first, onChangeFirst] = React.useState('');
-    const [last, onChangeLast] = React.useState('');
+    const [first_name, onChangeFirst] = React.useState('');
+    const [last_name, onChangeLast] = React.useState('');
 
-    const onTouch = async(e: {preventDefault: () => void}) => {
+    const {error} = useSelector((state: RootStore) => state.auth);
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        return () => {
+            if(error) {
+                dispatch(setError(''));
+            }
+        }
+    }, [error, dispatch]);
+
+    const createAccount = async (username: string, first_name: string, last_name: string, birthday: string) => {
+        try {
+            await axios.post('https://thesocialjusticewarriors.com/api/home/add', {
+            user: {
+                userName: username,
+                firstName: first_name,
+                lastName: last_name,
+                birthday: birthday
+                }
+            });
+        } catch (err) {
+            console.log(err)
+            setError('');
+        }
+    }
+
+
+    const onTouch = async(e: GestureResponderEvent) => {
         e.preventDefault();
-        const name = email.split("@")[0]
-        Login.createAccount(name, password, email, first, last, convertDate(date), "Default profile")
+        const name = username.split("@")[0]
+        Login.createAccount(name, password, username, first_name, last_name, convertDate(birthday), "Default profile")
         .then((signUpResult: ISignUpResult) => {
             if(signUpResult) {
+                createAccount(name.toLowerCase(), first_name, last_name, convertDate(birthday));
                 navigation.navigate('Login');
             } else {
+                setError('');
                 navigation.navigate('Register');
             }
         }).catch(console.error);
+
+
+
     } 
 
     const ref1 = React.useRef();
@@ -38,7 +76,7 @@ export default function RegisterScreen(this: any) {
     const ref3 = React.useRef();
 
     const [isPickerShow, setIsPickerShow] = React.useState(false);
-    const [date, setDate] = React.useState(new Date(Date.now()));
+    const [birthday, setBirthday] = React.useState(new Date(Date.now()));
 
     const showPicker = () => {
         setIsPickerShow(true);
@@ -46,10 +84,10 @@ export default function RegisterScreen(this: any) {
 
     const onChange = (e, val) => {
         if(val) {
-            setDate(val);
+            setBirthday(val);
             setIsPickerShow(false);
         } else {
-            setDate(new Date(Date.now()))
+            setBirthday(new Date(Date.now()))
             setIsPickerShow(false);
         }
     }
@@ -57,7 +95,7 @@ export default function RegisterScreen(this: any) {
     function convertDate(date: string | number | Date) {
         function pad(s: string | number) { return (s < 10) ? '0' + s : s; }
         var d = new Date(date)
-        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-')
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-');
     }
 
     return (
@@ -67,8 +105,8 @@ export default function RegisterScreen(this: any) {
                 <Text style={styles.header}>Email</Text>
                 <TextInput
                 style={styles.input}
-                onChangeText={onChangeEmail}
-                value={email}
+                onChangeText={onChangeUsername}
+                value={username}
                 autoCompleteType='email'
                 keyboardType='email-address'
                 returnKeyType='next'
@@ -81,7 +119,7 @@ export default function RegisterScreen(this: any) {
                 ref={ref1}
                 style={styles.input}
                 onChangeText={onChangeFirst}
-                value={first}
+                value={first_name}
                 textContentType='givenName'
                 autoCompleteType='name'
                 returnKeyType='next'
@@ -94,7 +132,7 @@ export default function RegisterScreen(this: any) {
                 ref={ref2}
                 style={styles.input}
                 onChangeText={onChangeLast}
-                value={last}
+                value={last_name}
                 textContentType='familyName'
                 autoCompleteType='name'
                 returnKeyType='next'
@@ -125,7 +163,7 @@ export default function RegisterScreen(this: any) {
                     {/* The date picker */}
                     {isPickerShow && (
                         <DateTimePicker
-                        value={date}
+                        value={birthday}
                         mode={'date'}
                         display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                         onChange={onChange}
@@ -134,7 +172,7 @@ export default function RegisterScreen(this: any) {
                     )}
                     </View>
                     <View style={{flexDirection:'column'}}>
-                        <Text style={styles.input2}>{convertDate(date)}</Text>
+                        <Text style={styles.input2}>{convertDate(birthday)}</Text>
                     </View>
                 </View>
                 <View style={styles.container3}>

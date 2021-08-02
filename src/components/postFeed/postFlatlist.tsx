@@ -38,6 +38,7 @@ const PostFlatList = (props: any) => {
         //  the next determines what the key is.
         keyExtractor={item => item.post_id}
         extraData={props.data}
+        initialNumToRender={10}
       />
     </View>
   );

@@ -8,7 +8,7 @@ export const GetUser = (username: string) => async (dispatch: Dispatch <UserDisp
             type: USER_LOADING
         })
 
-        const res = await axios.get(`/getuser/${username}`);
+        const res = await axios.get(`/getuser`);
         dispatch({
             type: USER_SUCCESS,
             payload: res.data

@@ -28,7 +28,7 @@ const PostList = (props: any) => {
       ]
 
     const currentUser = useSelector((state: RootStore) => state.auth.user);
-    console.log(currentUser);
+
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(DEFAULT);
     const [user, setUser] = useState(currentUser?.userName);
@@ -43,7 +43,7 @@ const PostList = (props: any) => {
         .then(function (response: any) {
           const resString = JSON.stringify(response.data.posts.Items);
           getData = JSON.parse(resString);
-          console.log(getData);
+          //console.log(getData);
           setLoading(false);
           setData(getData);
         })
@@ -54,6 +54,9 @@ const PostList = (props: any) => {
 
     
     const sendPost = async (newPost: string) => {
+      if(newPost === ""){
+        newPost = "SQUAWWWWWKKKKKKKKKKKK!!!!!!!!"
+      }
       try {
         // const x = String(await login.getUserName());
         // console.log(x, newPost);
@@ -79,42 +82,7 @@ const PostList = (props: any) => {
       }
       setPost('');
       setButtonText('Wave');
-      if (newPost != '') {
-        // Use of the spread operator here is NECESSARY for live
-        //  re-rendering of the flatlist component
-        const tempData = [...data];
-
-        // const postData = {
-        //   socialPosts: {
-        //     postText: newPost,
-        //     userName: user
-        //   }
-        // };
-        // var postConfig = {
-        //   method: 'post',
-        //   url: 'https://zony09cx2d.execute-api.us-east-1.amazonaws.com/dev/api/home/post/addpost',
-        //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        //   data : postData
-        // };
-
-        sendPost(newPost);
-        // axios(postConfig)
-        //   .then(function (response: any) {
-        //     console.log(JSON.stringify(response.data));
-        //     setLoading(true);
-        //   })
-        //   .catch(function (error: any) {
-        //     console.log(error);
-        //   });
-        
-        /*Deprecated* - used when post data was hardcoded, for testing purposes*/
-        // Herein is the data saved for a visible update
-        // tempData.unshift({postId: 'NEW MESSAGE ID', user: user, body: newPost});
-
-        // Save function here or below
-        // setData(tempData);
-        // *Deprecated*/
-      }
+      sendPost(newPost);
     }
 
     if (isLoading) {
@@ -137,7 +105,7 @@ const PostList = (props: any) => {
           style={styles.input}
           multiline={true}
           numberOfLines={6}
-          placeholder={`Type something in, ${user}!"`}
+          placeholder={`Type something in, ${user}!`}
           onChangeText={(post) => {
             if (post.trim() != '') {
               setButtonText('Post')
