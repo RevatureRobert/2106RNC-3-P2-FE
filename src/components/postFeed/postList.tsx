@@ -82,13 +82,6 @@ const PostList = (props: any) => {
       }
       setPost('');
       setButtonText('Wave');
-      // if (newPost != '') {
-      //   // Use of the spread operator here is NECESSARY for live
-      //   //  re-rendering of the flatlist component
-      //   const tempData = [...data];
-
-      //   sendPost(newPost);
-      // }
       sendPost(newPost);
     }
 

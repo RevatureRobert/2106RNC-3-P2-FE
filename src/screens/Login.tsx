@@ -15,7 +15,7 @@ type LoginScreenNavigationProp = StackNavigationProp<
 
 export default function LoginScreen() {
     const navigation = useNavigation<LoginScreenNavigationProp>();
-    const [username, onChangeUsername] = useState('');
+    const [name, onChangeName] = useState('');
     const [password, onChangePass] = useState('');
 
     const { error } = useSelector((state: RootStore) => state.auth);
@@ -26,13 +26,14 @@ export default function LoginScreen() {
             if (error) {
                 dispatch(setError(''));
             }
-            onChangeUsername('');
+            onChangeName('');
             onChangePass('');
         }
     }, [error, dispatch]);
 
     const onTouch = async(e: GestureResponderEvent) => {
         e.preventDefault();
+        const username = name.split("@")[0]
         dispatch(login({ username, password }));
     }
 
@@ -45,8 +46,8 @@ export default function LoginScreen() {
                 <Text style={styles.title}>Username</Text>
                 <TextInput
                 style={styles.input}
-                onChangeText={(text: string) => onChangeUsername(text)}
-                value={username}
+                onChangeText={(text: string) => onChangeName(text)}
+                value={name}
                 textContentType='username'
                 returnKeyType='next'
                 autoCompleteType='email'
