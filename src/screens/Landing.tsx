@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { 
     StyleSheet, 
     Image, 
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { AuthStackParamList } from '../components/types';
@@ -17,6 +18,7 @@ type LandingScreenNavigationProp = StackNavigationProp<
 const LandingScreen = () => {
     const navigation = useNavigation<LandingScreenNavigationProp>();
     return (
+        <ScrollView style={{backgroundColor: '#343a40'}}>
         <View style={styles.container}>
             <Image
                 style={styles.logo}
@@ -31,17 +33,11 @@ const LandingScreen = () => {
                     <Text style={styles.register}>I don't have an account</Text>
             </TouchableOpacity>
         </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    input: {
-        padding: 10,
-        height: 50,
-        borderWidth:2,
-        backgroundColor:"#fff",
-        borderRadius:20
-    },
     title: {
         alignSelf: "center",
         fontSize: 30,
@@ -50,7 +46,7 @@ const styles = StyleSheet.create({
     logo: {
         alignSelf: "center",
         padding: 150,
-        marginTop: 150
+        marginTop: 100
     },
     container: {
         flex: 1,

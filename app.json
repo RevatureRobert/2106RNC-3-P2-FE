@@ -7,9 +7,9 @@
     "scheme": "sjw",
     "icon": "./src/assets/images/icon.png",
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./src/assets/images/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#343a40"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
