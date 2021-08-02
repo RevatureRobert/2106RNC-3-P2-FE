@@ -59,7 +59,7 @@ export default function RegisterScreen() {
         Login.createAccount(name, password, username, first_name, last_name, convertDate(birthday), "Default profile")
         .then((signUpResult: ISignUpResult) => {
             if(signUpResult) {
-                createAccount(username, first_name, last_name, convertDate(birthday));
+                createAccount(name, first_name, last_name, convertDate(birthday));
                 navigation.navigate('Login');
             } else {
                 setError('');
