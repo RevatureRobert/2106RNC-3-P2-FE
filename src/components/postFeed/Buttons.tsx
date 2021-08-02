@@ -1,6 +1,7 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import axios from "axios";
 import React, { useState } from "react";
-import { TouchableOpacity, View, Modal, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Modal, Text, StyleSheet, GestureResponderEvent } from "react-native";
 
 
 export default function Buttons() {
@@ -10,21 +11,10 @@ export default function Buttons() {
     const onClose = () => {
         setModalVisible(false);
     }
-
-    const onLike = () => {
-        setModalVisible(true);
-        setText("You've liked this post!");
-    }
     
     const onCancel = () => {
         setModalVisible(true);
-        setText("You've cancelled this post! Their families, bosses and the police have been contacted. Good Job!!");
-    }
-
-    const onComment = () => {
-        //place to add a comment extension function
-        setModalVisible(true);
-        setText("Do you want to add a comment?");
+        setText("You've cancelled this post! Their families, bosses and the police have been contacted. Good Job! 👍");
     }
 
     return(
@@ -44,13 +34,6 @@ export default function Buttons() {
                 <Text style={styles.text}>{text}</Text>
             </View>
         </Modal>
-
-        <TouchableOpacity onPress={onLike}>
-            <LikeIcon name='like1' color='#1d3354'/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onComment}>
-            <CommentIcon name='message1' color='#1d3354' />
-        </TouchableOpacity>
         <TouchableOpacity onPress={onCancel}>
             <CancelIcon name='cancel' color='#d64045' />
         </TouchableOpacity>        
@@ -58,20 +41,12 @@ export default function Buttons() {
     )
 }
 
-function LikeIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
-    return <AntDesign size={20} style={{marginBottom: -3, margin: 5, paddingRight: 10}} {...props} />;
-}
-
 function CancelIcon(props: { name: React.ComponentProps<typeof MaterialCommunityIcons>['name']; color: string }) {
-    return <MaterialCommunityIcons size={20} style={{marginBottom: -3, margin: 5}} {...props} />;
-}
-
-function CommentIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
-    return <AntDesign size={20} style={{marginBottom: -3, margin: 5, paddingRight: 10}} {...props} />;
+    return <MaterialCommunityIcons size={30} style={{marginBottom: -3, margin: 5}} {...props} />;
 }
 
 function CloseIcon(props: { name: React.ComponentProps<typeof AntDesign>['name']; color: string }) {
-    return <AntDesign size={20} style={{marginBottom: -3, padding:2, alignSelf: 'flex-end'}} {...props} />;
+    return <AntDesign size={20} style={{marginBottom: -3, padding:5, alignSelf: 'flex-end'}} {...props} />;
 }
 
 const styles = StyleSheet.create({
@@ -79,7 +54,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent:'center',
         color: '#fff',
-        paddingHorizontal: 50,
+        paddingHorizontal: 40,
         paddingVertical: 10,
         borderRadius: 20,
         fontWeight: 'bold',
@@ -91,9 +66,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#1d3354',
         borderWidth:5,
         borderColor:'#d64045',
-        paddingHorizontal: 2.5,
-        paddingVertical: 2.5,
+        marginVertical: 10,
+        paddingVertical: 3,
         borderRadius: 20,
-        marginTop: 350
+        marginTop: 350,
+        marginHorizontal: 30
     }
 })

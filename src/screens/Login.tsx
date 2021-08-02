@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, TextInput, Image, TouchableOpacity, ScrollView, GestureResponderEvent } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, ScrollView, GestureResponderEvent } from 'react-native';
 import { Text, View } from '../components/Themed';
-import LoginCognito from '../../LoginCognito';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 import { AuthStackParamList } from '../components/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -37,14 +35,6 @@ export default function LoginScreen() {
         e.preventDefault();
         const username = name.split("@")[0]
         dispatch(login({ username, password }));
-        // LoginCognito.login(username, password, false)
-        //     .then((signUpResult: CognitoUser) => {
-        //         if(signUpResult) {
-        //             navigation.navigate('Main');     
-        //         } else {
-        //             navigation.navigate('Login');
-        //         }
-        //     }).catch(console.error)
     }
 
     const ref1 = useRef();

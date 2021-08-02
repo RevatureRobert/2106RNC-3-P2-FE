@@ -18,7 +18,6 @@ const PostSwitch = (props: any) => {
     const user = item.username;
     const date = new Date(item.post_date_time);
 
-
     switch (type) {
         case 'post':
             return (
