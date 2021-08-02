@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Image, NativeSyntheticEvent, TextInputChangeEventData, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, Image, NativeSyntheticEvent, TextInputChangeEventData, Button, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { Text, View } from '../components/Themed';
 import LoginCognito from '../../LoginCognito';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { BottomTabParamList } from '../components/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/actions/Authentication';
 
 type LogoutScreenNavigationProp = StackNavigationProp<
     BottomTabParamList,
@@ -14,11 +16,10 @@ type LogoutScreenNavigationProp = StackNavigationProp<
 
 export default function LogoutScreen() {
     const navigation = useNavigation<LogoutScreenNavigationProp>();
+    const dispatch = useDispatch();
 
-    const onTouch = async(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        e.preventDefault();
-        await LoginCognito.logout();
-        navigation.navigate('Landing');
+    const onTouch = () => {
+        dispatch(logout());
     }
 
     return (
@@ -29,7 +30,7 @@ export default function LogoutScreen() {
             />
             <View style={styles.container2}>
                 <Text style={styles.title}>Are you sure you want to leave?</Text>
-                <TouchableOpacity style={styles.container3} onPress={() => navigation.navigate('Landing')}>
+                <TouchableOpacity style={styles.container3} onPress={onTouch}>
                     <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.container3} onPress={() => navigation.goBack()}>

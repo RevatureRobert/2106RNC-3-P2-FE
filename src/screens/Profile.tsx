@@ -1,29 +1,81 @@
-import { Auth } from 'aws-amplify';
 import React, { useRef, useState } from 'react';
 import { GestureResponderEvent, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import login from '../../LoginCognito';
+import { useSelector } from 'react-redux';
 import { RootStore } from '../redux/store';
-
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 // The data object should have each of the below 8 attributes
 export default function ProfileScreen() {
+  const navigation = useNavigation();
   const currentUser = useSelector((state: RootStore) => state.auth.user);
-  console.log(currentUser);
 
   const [editable, toggleEditing] = useState(false);
   const [buttonText, setButtonText] = useState("Edit");
-  const [userData, setUserData] = useState({
-      Email: currentUser?.userName,
-      FirstName: currentUser?.firstName,
-      LastName: currentUser?.lastName,
-      BirthDate: currentUser?.birthDate,
-      PhoneNumber: currentUser?.phoneNumber,
-      NickName: currentUser?.nickName,
-      PreferredName: currentUser?.publicName,
-      Profile: currentUser?.profile,
-  });
+  const [username, setUsername] = useState(currentUser?.userName);
+  //for the axios get function
+  const [first, setFirst] = useState('');
+  const [last, setLast] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [phone, setPhone] = useState('');
+  const [preferred, setPreferred] = useState('');
+  const [profile, setProfile] = useState('');
 
+  //for the axios put function
+  const [newUsername, setNewUsername] = useState(username) 
+  const [newFirst, setNewFirst] = useState(first);
+  const [newLast , setNewLast] = useState(last);
+  const [newBirthday, setNewBirthday] = useState(birthday);
+  const [newPhone, setNewPhone] = useState(phone);
+  const [newPreferred, setNewPreferred] = useState(preferred);
+  const [newProfile, setNewProfile] = useState(profile);
+
+  //get the currentUser's info
+  const currentUserData = axios({
+    method: 'GET',
+    url: 'https://thesocialjusticewarriors.com/api/home/all'}).then((res) => {
+      //gets an array of users    
+      const users = res.data.users.Items;
+      for(let key of users) {
+        if(key.username.toLowerCase().includes(currentUser?.userName)){
+          setNewUsername(key.username);
+          setFirst(key.first_name);
+          setLast(key.last_name);
+          setBirthday(key.birthday);
+          setPhone(key.phone_number);
+          setPreferred(key.public_name);
+          setProfile(key.profile);
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+  });
+  
+  const updateUser = async(
+    username: string, 
+    first:string, 
+    last:string,
+    birthday: string, 
+    phone: string,
+    preferred: string,
+    profile: string
+  ) => {
+    try {
+     await axios.post('https://thesocialjusticewarriors.com/api/home/add', {
+      user: {
+        userName: username,
+        firstName: first,
+        lastName: last,
+        phoneNumber: phone,
+        publicName: preferred,
+        birthday: birthday,
+        profile: profile
+      }
+    });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const submitHandle = (e: GestureResponderEvent) => {
     e.preventDefault();
@@ -33,32 +85,26 @@ export default function ProfileScreen() {
     } else {
       setButtonText("Edit");
       // Here's where you can properly save edited data
-      Auth.currentCredentials();
-      Auth.updateUserAttributes(currentUser, {
-        'firstName': userData.FirstName,
-        'lastName': userData.LastName,
-        'birthDate': userData.BirthDate,
-        'nickName': userData.NickName,
-        'publicName': userData.PreferredName,
-        'profile': userData.Profile
-      });
-      console.log(userData);
+      updateUser(
+        newUsername,
+        newFirst,
+        newLast,
+        newBirthday,
+        newPhone,
+        newPreferred,
+        newProfile
+      )
+      navigation.navigate('Main');
+      //console.log(userData);
     }
   }
-
-  const manageEdits = (key: string, e: any) => {
-    const target = e.target;
-      setUserData({
-          ...userData,
-          [key]: target.value});
-  }
   
+  //to automatically move to the next line after hitting enter
   const ref1 = useRef();
   const ref2 = useRef();
   const ref3 = useRef();
   const ref4 = useRef();
   const ref5 = useRef();
-  const ref6 = useRef();
 
   return (
     <ScrollView style={styles.container}>
@@ -81,31 +127,30 @@ export default function ProfileScreen() {
               paddingHorizontal:15
             }}  
             editable={false}
-            >{userData.Email}</TextInput>
+            >{newUsername}</TextInput>
           </View>
 
           <View style={{flexDirection:'row'}}>
             <Text style={styles.header}>First Name</Text>
             <TextInput 
-            style={styles.input}
-            value={userData.FirstName} 
-            placeholder={userData.FirstName}
+            style={styles.input} 
             editable={editable} 
-            onChange={(e) => manageEdits('FirstName', e)}
+            value={newFirst}
+            placeholder={first}
+            onChangeText={(e:string) => setNewFirst(e)}
             autoFocus={true}
             onSubmitEditing={() => ref1.current.focus()}
-            returnKeyType='next' 
-            />
+            returnKeyType='next'/>
           </View>
 
           <View style={{flexDirection:'row'}}>
             <Text style={styles.header}>Last Name</Text>
             <TextInput 
             style={styles.input}
-            value={userData.LastName} 
-            placeholder={userData.LastName} 
+            value={newLast}
+            placeholder={last} 
             editable={editable} 
-            onChange={(e) => manageEdits('LastName', e)}
+            onChangeText={(e: string) => setNewLast(e)}
             ref={ref1}
             autoFocus={true}
             onSubmitEditing={() => ref2.current.focus()}
@@ -117,10 +162,10 @@ export default function ProfileScreen() {
             <Text style={styles.header}>Birthday</Text>
             <TextInput 
             style={styles.input}
-            value={userData.BirthDate} 
-            placeholder={userData.BirthDate}
+            value={newBirthday}
+            placeholder={birthday} 
             editable={editable} 
-            onChange={(e) => manageEdits('BirthDate', e)}
+            onChangeText={(e: string) => setNewBirthday(e)}
             ref={ref2}
             autoFocus={true}
             onSubmitEditing={() => ref3.current.focus()} 
@@ -132,10 +177,10 @@ export default function ProfileScreen() {
             <Text style={styles.header}>Phone Number</Text>
             <TextInput 
             style={styles.input}
-            value={userData.PhoneNumber} 
-            placeholder={userData.PhoneNumber} 
+            value={newPhone}
+            placeholder={phone} 
             editable={editable} 
-            onChange={(e) => manageEdits('PhoneNumber', e)}
+            onChangeText={(e:string) => setNewPhone(e)}
             ref={ref3}
             autoFocus={true}
             onSubmitEditing={() => ref4.current.focus()}
@@ -144,31 +189,16 @@ export default function ProfileScreen() {
           </View>
 
           <View style={{flexDirection:'row'}}>
-            <Text style={styles.header}>Nickname</Text>
-            <TextInput 
-            style={styles.input}
-            value={userData.NickName} 
-            placeholder={userData.NickName} 
-            editable={editable} 
-            onChange={(e) => manageEdits('NickName', e)}
-            ref={ref4}
-            autoFocus={true}
-            onSubmitEditing={() => ref5.current.focus()}
-            returnKeyType='next'  
-            />
-          </View>
-
-          <View style={{flexDirection:'row'}}>
             <Text style={styles.header}>Preferred Name</Text>
             <TextInput 
             style={styles.input}
-            value={userData.PreferredName} 
-            placeholder={userData.PreferredName}
+            value={newPreferred} 
+            placeholder={preferred}
             editable={editable} 
-            onChange={(e) => manageEdits('PreferredName', e)} 
-            ref={ref5}
+            onChangeText={(e:string) => setNewPreferred(e)} 
+            ref={ref4}
             autoFocus={true}
-            onSubmitEditing={() => ref6.current.focus()}
+            onSubmitEditing={() => ref5.current.focus()}
             returnKeyType='next' 
             />
           </View>
@@ -176,14 +206,14 @@ export default function ProfileScreen() {
             <View style={{flexDirection:'row'}}>
               <Text style={styles.header}>Profile</Text>
               <TextInput 
-              style={styles.input}
+              style={styles.input2}
               multiline={true} 
               numberOfLines={3} 
-              value={userData.Profile} 
-              placeholder={userData.Profile} 
-              editable={editable} 
-              onChange={(e) => manageEdits('Profile', e)}
-              ref={ref6}
+              value={newProfile} 
+              editable={editable}
+              placeholder={profile} 
+              onChangeText={(e:string) => setNewProfile(e)}
+              ref={ref5}
               autoFocus={true}
               returnKeyType='done'
               />
@@ -199,7 +229,7 @@ export default function ProfileScreen() {
   }
   
   const styles = StyleSheet.create({
-      input: {
+    input: {
         flex: 1,
         paddingHorizontal: 15,
         height: 50,
@@ -208,6 +238,15 @@ export default function ProfileScreen() {
         borderRadius: 20,
         color: '#000'
     },
+    input2: {
+      flex: 1,
+      paddingHorizontal: 15,
+      height: 80,
+      borderWidth:2,
+      backgroundColor: "#fff",
+      borderRadius: 20,
+      color: '#000'
+  },
     header: {
         alignSelf: "flex-start",
         fontSize: 20,
@@ -255,4 +294,3 @@ export default function ProfileScreen() {
       margin:20
     },
   });
-  

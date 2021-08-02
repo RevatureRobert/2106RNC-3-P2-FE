@@ -37,7 +37,6 @@ import { RootStore } from '../../redux/store';
             <Stack.Screen name="Landing" component={LandingScreen} />
             <Stack.Screen name="Login" component={LoginNavigator} />
             <Stack.Screen name="Register" component={RegisterNavigator} />
-            
             </>
           )
         }
