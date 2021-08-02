@@ -40,27 +40,6 @@ export default function ProfileScreen() {
   const [newPreferred, setNewPreferred] = useState(preferred);
   const [newProfile, setNewProfile] = useState(profile);
 
-  //get the currentUser's info
-  // const currentUserData = axios({
-  //   method: 'GET',
-  //   url: 'https://thesocialjusticewarriors.com/api/home/all'}).then((res) => {
-  //     //gets an array of users
-  //     const users = res.data.users.Items;
-  //     for(let key of users) {
-  //       if(key.username.toLowerCase().includes(currentUser?.userName)){
-  //         setNewUsername(key.username);
-  //         setFirst(key.first_name);
-  //         setLast(key.last_name);
-  //         setBirthday(key.birthday);
-  //         setPhone(key.phone_number);
-  //         setPreferred(key.public_name);
-  //         setProfile(key.profile);
-  //       }
-  //     }
-  //   }).catch((err) => {
-  //     console.log(err);
-  // });
-
   if(isLoading){
 
     let config = {
