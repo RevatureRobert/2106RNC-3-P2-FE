@@ -15,7 +15,6 @@ export default function Buttons() {
     const onCancel = () => {
         setModalVisible(true);
         setText("You've cancelled this post! Their families, bosses and the police have been contacted. Good Job! 👍");
-
     }
 
     return(
