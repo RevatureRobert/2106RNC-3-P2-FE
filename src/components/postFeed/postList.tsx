@@ -54,6 +54,9 @@ const PostList = (props: any) => {
 
     
     const sendPost = async (newPost: string) => {
+      if(newPost === ""){
+        newPost = "SQUAWWWWWKKKKKKKKKKKK!!!!!!!!"
+      }
       try {
         // const x = String(await login.getUserName());
         // console.log(x, newPost);
@@ -79,13 +82,14 @@ const PostList = (props: any) => {
       }
       setPost('');
       setButtonText('Wave');
-      if (newPost != '') {
-        // Use of the spread operator here is NECESSARY for live
-        //  re-rendering of the flatlist component
-        const tempData = [...data];
+      // if (newPost != '') {
+      //   // Use of the spread operator here is NECESSARY for live
+      //   //  re-rendering of the flatlist component
+      //   const tempData = [...data];
 
-        sendPost(newPost);
-      }
+      //   sendPost(newPost);
+      // }
+      sendPost(newPost);
     }
 
     if (isLoading) {
