@@ -22,7 +22,8 @@ Rewrite your Project 1 using the following technologies:
 ---
 
 **Backend**
-[Link to the backend repository](https://github.com/RevatureRobert/2106RNC-3-P2-BE)
+
+- [Link to the backend repository](https://github.com/RevatureRobert/2106RNC-3-P2-BE)
 
 1. Application must be serverless, implementing AWS Services.
 2. All code must be written in Typescript
